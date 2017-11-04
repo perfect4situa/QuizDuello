@@ -3,13 +3,13 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import view.FinestraClient;
+import view.FinestraConnessioneClient;
 
 public class ControllerClient implements ActionListener {
 	
-	private FinestraClient view;
+	private FinestraConnessioneClient view;
 
-	public ControllerClient(FinestraClient view) {
+	public ControllerClient(FinestraConnessioneClient view) {
 		//inizializzazione finestra
 		
 		view.setVisible(true);

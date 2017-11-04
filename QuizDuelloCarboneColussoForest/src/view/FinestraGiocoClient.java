@@ -1,18 +1,15 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
-public class FinestraClient extends JFrame {
+public class FinestraGiocoClient extends JFrame {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -839161723918206407L;
 	private JPanel contentPane;
-	private JPanel login;
 
 	/**
 	 * Launch the application.
@@ -21,7 +18,7 @@ public class FinestraClient extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FinestraClient frame = new FinestraClient();
+					FinestraGiocoClient frame = new FinestraGiocoClient();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,20 +30,13 @@ public class FinestraClient extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FinestraClient() {
-		setTitle("QuizDuello");
-		setResizable(false);
-		setAlwaysOnTop(true);
+	public FinestraGiocoClient() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		login = new JPanel();
-		login.setBounds(0, 0, 444, 271);
-		contentPane.add(login);
-		login.setLayout(null);
 	}
 
 }
