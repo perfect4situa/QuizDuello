@@ -1,4 +1,4 @@
-Domanda000;RispostaVera;RispostaFalsa1;RispostaFalsa2;RispostaFalsa3;
-Domandaaaa;RispostaVera;RispostaFalsa1;RispostaFalsa2;RispostaFalsa3;
-Domandabbb;RispostaVera;RispostaFalsa1;RispostaFalsa2;RispostaFalsa3;
-Domandaccc;RispostaVera;RispostaFalsa1;RispostaFalsa2;RispostaFalsa3;
+Domanda000;RispostaVera;RispostaFalsa1;RispostaFalsa2;RispostaFalsa3
+Domandaaaa;RispostaVera;RispostaFalsa1;RispostaFalsa2;RispostaFalsa3
+Domandabbb;RispostaVera;RispostaFalsa1;RispostaFalsa2;RispostaFalsa3
+Domandaccc;RispostaVera;RispostaFalsa1;RispostaFalsa2;RispostaFalsa3
