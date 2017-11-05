@@ -4,10 +4,10 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.Toolkit;
 
 public class FinestraConnessioneClient extends JFrame {
 
@@ -16,7 +16,7 @@ public class FinestraConnessioneClient extends JFrame {
 	 */
 	private static final long serialVersionUID = -839161723918206407L;
 	private JPanel contentPane;
-	private JPanel login;
+	private JPanel panel;
 	private JLabel lblIp;
 	private JTextField ip;
 	private JLabel lblPorta;
@@ -45,7 +45,8 @@ public class FinestraConnessioneClient extends JFrame {
 	 * Create the frame.
 	 */
 	public FinestraConnessioneClient() {
-		setTitle("QuizDuello");
+		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizDuelloCarboneColussoForest\\resources\\icon.png"));
+		setTitle("QuizDuello (Connessione)");
 		setResizable(false);
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,49 +55,48 @@ public class FinestraConnessioneClient extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		login = new JPanel();
-		login.setBounds(0, 0, 444, 271);
-		contentPane.add(login);
-		login.setLayout(null);
+		panel = new JPanel();
+		panel.setBounds(0, 0, 444, 271);
+		contentPane.add(panel);
+		panel.setLayout(null);
 		
-		lblIp = new JLabel("IP");
-		lblIp.setBounds(28, 35, 26, 14);
-		login.add(lblIp);
+		lblIp = new JLabel("IP:");
+		lblIp.setToolTipText("IP del server");
+		lblIp.setBounds(44, 35, 26, 14);
+		panel.add(lblIp);
 		
 		ip = new JTextField();
-		ip.setBounds(71, 32, 86, 20);
-		login.add(ip);
+		ip.setToolTipText("Inserisci l'IP del server");
+		ip.setBounds(80, 32, 86, 20);
+		panel.add(ip);
 		ip.setColumns(10);
 		
-		lblPorta = new JLabel("PORTA");
-		lblPorta.setBounds(220, 35, 46, 14);
-		login.add(lblPorta);
+		lblPorta = new JLabel("PORTA:");
+		lblPorta.setToolTipText("Porta del server");
+		lblPorta.setBounds(226, 35, 46, 14);
+		panel.add(lblPorta);
 		
 		porta = new JTextField();
-		porta.setBounds(292, 32, 86, 20);
-		login.add(porta);
+		porta.setToolTipText("Inserisci la porta del server");
+		porta.setBounds(284, 32, 86, 20);
+		panel.add(porta);
 		porta.setColumns(10);
 		
-		lblNickname = new JLabel("NICKNAME");
-		lblNickname.setBounds(43, 99, 73, 14);
-		login.add(lblNickname);
+		lblNickname = new JLabel("NICKNAME:");
+		lblNickname.setToolTipText("Nickname di gioco");
+		lblNickname.setBounds(133, 99, 63, 14);
+		panel.add(lblNickname);
 		
 		nickname = new JTextField();
-		nickname.setBounds(130, 96, 86, 20);
-		login.add(nickname);
+		nickname.setToolTipText("Inserisci il tuo nickname");
+		nickname.setBounds(207, 96, 86, 20);
+		panel.add(nickname);
 		nickname.setColumns(10);
 		
 		btnConnetti = new JButton("CONNETTI");
-		btnConnetti.setBounds(263, 192, 115, 23);
-		login.add(btnConnetti);
-	}
-
-	public JPanel getLogin() {
-		return login;
-	}
-
-	public void setLogin(JPanel login) {
-		this.login = login;
+		btnConnetti.setToolTipText("Richiesta connessione al server");
+		btnConnetti.setBounds(166, 175, 115, 23);
+		panel.add(btnConnetti);
 	}
 
 	public JTextField getIp() {
@@ -130,5 +130,4 @@ public class FinestraConnessioneClient extends JFrame {
 	public void setBtnConnetti(JButton btnConnetti) {
 		this.btnConnetti = btnConnetti;
 	}
-
 }
