@@ -4,20 +4,26 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import view.FinestraConnessioneClient;
+import view.FinestraGiocoClient;
+import view.FinestraRisultati;
 
 public class ControllerClient implements ActionListener {
 	
-	private FinestraConnessioneClient view;
+	private FinestraConnessioneClient viewConnect;
+	private FinestraGiocoClient viewGame;
+	private FinestraRisultati viewEnd;
 
-	public ControllerClient(FinestraConnessioneClient view) {
+	public ControllerClient(FinestraConnessioneClient viewConnect, FinestraGiocoClient viewGame, FinestraRisultati viewEnd) {
 		//inizializzazione finestra
-		
-		view.setVisible(true);
-		
-		this.view = view;
+		viewConnect.setVisible(true);
+		viewGame.setVisible(false);
+		viewEnd.setVisible(false);
+		this.viewConnect = viewConnect;
+		this.viewGame = viewGame;
+		this.viewEnd = viewEnd;
 	}
 
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent evt) {
 		
 	}
 
