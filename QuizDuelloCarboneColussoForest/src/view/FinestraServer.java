@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -53,7 +54,8 @@ public class FinestraServer extends JFrame {
 	 * Create the frame.
 	 */
 	public FinestraServer() {
-		setTitle("QuizDuello(Server)");
+		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizDuelloCarboneColussoForest\\resources\\icon.png"));
+		setTitle("QuizDuello (Server)");
 		setResizable(false);
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
