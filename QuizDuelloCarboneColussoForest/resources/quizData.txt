@@ -2,3 +2,14 @@ Domanda000;RispostaVera;RispostaFalsa1;RispostaFalsa2;RispostaFalsa3
 Domandaaaa;RispostaVera;RispostaFalsa1;RispostaFalsa2;RispostaFalsa3
 Domandabbb;RispostaVera;RispostaFalsa1;RispostaFalsa2;RispostaFalsa3
 Domandaccc;RispostaVera;RispostaFalsa1;RispostaFalsa2;RispostaFalsa3
+Quando è nata la Formula1?;1950;1948;1952;1953
+Dove Bottas ha vinto la sua prima gara in F1?;Russia;Spagna;Austria;Monaco
+Quante volte Hamilton ha vinto il Gran Premio della Gran Bretagna?;5;4;3;Nessuna delle precedenti
+Con che scuderia ha corso Ayrton Senna nel 1986?;McLaren;Ferrari;Lotus;Williams
+Quanti piloti Finlandesi hanno corso e corrono tutt'ora in F1?;9;3;7;5
+In che anno è nato Micheal Schumacher?;1969;1967;1970;Nessuna delle precedenti
+In quale circuito nel 2018 non si terrà più il Gran Premio di F1?;Sepang;Hockenheim;Marina Bay;Interlagos
+Qual'è la cilindrata delle attuali monoposto di F1?;1600;2000;3000;1800
+In che tracciato si trova la famosa curva "Maggots"?;Silverstone;Austin;Sachsenring,Hungaroring
+Chi è stato il campione del mondo più vecchio della storia della F1?;Fangio;Schumacher;Mansell;Clark
+Chi è il pilota più giovane ad ottenere una prima fila in F1?;Stroll;Verstappen;Hamilton;Vettel
