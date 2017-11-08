@@ -8,7 +8,7 @@ import java.net.Socket;
 
 public class Utente {
 
-	private String Nickname;
+	private String nickname;
 	private Socket socket;
 	private double punteggio;
 	private BufferedReader in;
@@ -31,6 +31,34 @@ public class Utente {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+	
+	public void endConnection()
+	{
+		try {
+			in.close();
+			out.close();
+			socket.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		in=null;
+		out=null;
+		socket=null;
+	}
+	
+	private void reciveNickname()
+	{
+		recive=new Reciver(in);
+		
+		while(!recive.isArrived());
+		
+		if(recive.getMessage().startsWith("ng;"));
+		{
+			nickname=recive.getMessage().substring(3);
 		}
 	}
 }
