@@ -16,51 +16,46 @@ public class Utente {
 	private Sender send;
 	private Reciver recive;
 	
-	public Utente(Socket socket)
-	{
-		this.socket=socket;
+	public Utente(Socket socket) {
+		this.socket = socket;
 		this.openChannels();
 		this.reciveNickname();
 	}
 	
 	private void openChannels() {
-
 		try {
 			out = new PrintStream(socket.getOutputStream());
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public void endConnection()
-	{
+	public void endConnection()	{
 		try {
 			in.close();
 			out.close();
 			socket.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		in=null;
-		out=null;
-		socket=null;
+		in = null;
+		out = null;
+		socket = null;
 	}
 	
-	private void reciveNickname()
-	{
-		recive=new Reciver(in);
+	private void reciveNickname() {
+		recive = new Reciver(in);
 		
 		while(!recive.isArrived());
 		
-		if(recive.getMessage().startsWith("ng;"));
-		{
-			nickname=recive.getMessage().substring(3);
+		if(recive.getMessage().contains("newgame"))	{
+			String vet[] = recive.getMessage().split(";");
+			nickname = vet[1];
 		}
 	}
+	
 }
 
 

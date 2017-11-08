@@ -15,9 +15,6 @@ import javax.swing.JButton;
 
 public class FinestraGiocoClient extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1966956274434527677L;
 	private JPanel contentPane;
 	private JProgressBar progressBar;
@@ -30,9 +27,6 @@ public class FinestraGiocoClient extends JFrame {
 	private JButton btnRisposta_2;
 	private JButton btnRisposta_3;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -46,9 +40,6 @@ public class FinestraGiocoClient extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public FinestraGiocoClient() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizDuelloCarboneColussoForest\\resources\\icon.png"));
 		setTitle("QuizDuello");
@@ -158,4 +149,5 @@ public class FinestraGiocoClient extends JFrame {
 	public void setBtnRisposta_3(JButton btnRisposta_3) {
 		this.btnRisposta_3 = btnRisposta_3;
 	}
+	
 }

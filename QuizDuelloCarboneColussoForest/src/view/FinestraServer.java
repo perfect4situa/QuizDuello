@@ -17,9 +17,6 @@ import javax.swing.DefaultComboBoxModel;
 
 public class FinestraServer extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5769128379290199250L;
 	private JPanel contentPane;
 	private JPanel panel;
@@ -34,9 +31,6 @@ public class FinestraServer extends JFrame {
 	private JButton btnOff;
 	private JLabel lblOnOff;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -50,9 +44,6 @@ public class FinestraServer extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public FinestraServer() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizDuelloCarboneColussoForest\\resources\\icon.png"));
 		setTitle("QuizDuello (Server)");
@@ -190,4 +181,5 @@ public class FinestraServer extends JFrame {
 	public void setLblOnOff(JLabel lblOnOff) {
 		this.lblOnOff = lblOnOff;
 	}
+	
 }

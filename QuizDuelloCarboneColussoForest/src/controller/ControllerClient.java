@@ -13,17 +13,41 @@ public class ControllerClient implements ActionListener {
 	private FinestraGiocoClient viewGame;
 	private FinestraRisultati viewEnd;
 
-	public ControllerClient(FinestraConnessioneClient viewConnect, FinestraGiocoClient viewGame, FinestraRisultati viewEnd) {
-		//inizializzazione finestra
+	public ControllerClient(FinestraConnessioneClient viewConnect) {
+		viewConnect.getBtnConnetti().addActionListener(this);
 		viewConnect.setVisible(true);
-		viewGame.setVisible(false);
-		viewEnd.setVisible(false);
 		this.viewConnect = viewConnect;
-		this.viewGame = viewGame;
-		this.viewEnd = viewEnd;
 	}
 
 	public void actionPerformed(ActionEvent evt) {
+		
+		if(evt.getSource() == viewConnect.getBtnConnetti()) {
+			
+		}
+		
+		if(evt.getSource() == viewGame.getBtnRisposta()) {
+			
+		}
+		
+		if(evt.getSource() == viewGame.getBtnRisposta_1()) {
+			
+		}
+		
+		if(evt.getSource() == viewGame.getBtnRisposta_2()) {
+	
+		}
+		
+		if(evt.getSource() == viewGame.getBtnRisposta_3()) {
+	
+		}
+		
+		if(evt.getSource() == viewEnd.getBtnRigioca()) {
+			
+		}
+		
+		if(evt.getSource() == viewEnd.getBtnEsci()) {
+			
+		}
 		
 	}
 

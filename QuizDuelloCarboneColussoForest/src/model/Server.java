@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
 
-public class Server implements Runnable{
+public class Server implements Runnable {
 
 	private ArrayList<Utente> lista;
 	private ServerSocket server;
@@ -16,51 +16,38 @@ public class Server implements Runnable{
 	private int nGiocatori;
 	private int nQuiz;
 	
-	public Server()
-	{
-		
-		lista=new ArrayList<Utente>();
-		
+	public Server() {
+		lista = new ArrayList<Utente>();
 	}
 	
-	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		
 	}
 	
-	public void start(int port,int nGiocatori,int nQuiz)
-	{
-		this.port=port;
-		this.nGiocatori=nGiocatori;
-		this.nQuiz=nQuiz;
+	public void start(int port, int nGiocatori, int nQuiz) {
+		this.port = port;
+		this.nGiocatori = nGiocatori;
+		this.nQuiz = nQuiz;
 		
 		try {
-			server=new ServerSocket(port);
+			server = new ServerSocket(port);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		listaQuiz=new ListaQuiz();
 		
+		listaQuiz=new ListaQuiz();
 		try {
 			caricaQuiz(listaQuiz);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		t=new Thread(this);
+				
+		t = new Thread(this);
 		t.start();
-		
-		
 	}
 	
-	public void close()
-	{
-		for(int i=lista.size();i>0;i++)
-		{
+	public void close()	{
+		for(int i = lista.size(); i > 0; i++) {
 			lista.get(i).endConnection();
 			lista.remove(i);
 		}
@@ -68,7 +55,6 @@ public class Server implements Runnable{
 		try {
 			server.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		server=null;
@@ -134,7 +120,5 @@ public class Server implements Runnable{
 	public void setnQuiz(int nQuiz) {
 		this.nQuiz = nQuiz;
 	}
-
-	
 	
 }

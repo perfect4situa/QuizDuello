@@ -3,41 +3,35 @@ package model;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-public class Reciver implements Runnable{
+public class Reciver implements Runnable {
 
 	private String message;
 	private boolean arrived;
 	private BufferedReader in;
 	private Thread t;
 	
-	public Reciver(BufferedReader in)
-	{
-		message="";
-		arrived=false;
-		this.in=in;
+	public Reciver(BufferedReader in) {
+		message = "";
+		arrived = false;
+		this.in = in;
 		this.start();
 	}
 	
-	@Override
-	public void run() {
-		
-		do
-		{
+	public void run() {	
+		do {
 			try {
-				message=in.readLine();
+				message = in.readLine();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		while(message.equals(""));
 		
-		arrived=true;
+		arrived = true;
 	}
 	
-	public void start()
-	{
-		t=new Thread(this);
+	public void start()	{
+		t = new Thread(this);
 		t.start();
 	}
 
@@ -49,7 +43,4 @@ public class Reciver implements Runnable{
 		return arrived;
 	}
 	
-	
-	
-
 }

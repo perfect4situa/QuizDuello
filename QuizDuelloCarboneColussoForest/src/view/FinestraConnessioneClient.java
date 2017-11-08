@@ -11,9 +11,6 @@ import java.awt.Toolkit;
 
 public class FinestraConnessioneClient extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -839161723918206407L;
 	private JPanel contentPane;
 	private JPanel panel;
@@ -25,9 +22,6 @@ public class FinestraConnessioneClient extends JFrame {
 	private JTextField nickname;
 	private JButton btnConnetti;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -41,9 +35,6 @@ public class FinestraConnessioneClient extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public FinestraConnessioneClient() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizDuelloCarboneColussoForest\\resources\\icon.png"));
 		setTitle("QuizDuello (Connessione)");
@@ -130,4 +121,5 @@ public class FinestraConnessioneClient extends JFrame {
 	public void setBtnConnetti(JButton btnConnetti) {
 		this.btnConnetti = btnConnetti;
 	}
+	
 }
