@@ -18,16 +18,15 @@ public class Reciver implements Runnable {
 	}
 	
 	public void run() {	
-		do {
-			try {
-				message = in.readLine();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		while(message.equals(""));
 		
+		try {
+			message = in.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 		arrived = true;
+	
 	}
 	
 	public void start()	{

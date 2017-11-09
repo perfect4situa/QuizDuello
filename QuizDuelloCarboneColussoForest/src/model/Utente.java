@@ -54,6 +54,7 @@ public class Utente {
 			String vet[] = recive.getMessage().split(";");
 			nickname = vet[1];
 		}
+		
 	}
 	
 }
