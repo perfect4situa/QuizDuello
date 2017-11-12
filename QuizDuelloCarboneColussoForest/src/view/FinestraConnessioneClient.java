@@ -36,7 +36,7 @@ public class FinestraConnessioneClient extends JFrame {
 	}
 
 	public FinestraConnessioneClient() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizDuelloCarboneColussoForest\\resources\\icon.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizDuello\\resources\\icon.png"));
 		setTitle("QuizDuello (Connessione)");
 		setResizable(false);
 		setAlwaysOnTop(true);

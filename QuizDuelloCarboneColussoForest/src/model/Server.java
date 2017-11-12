@@ -1,124 +1,82 @@
 package model;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.util.ArrayList;
 
 public class Server implements Runnable {
 
-	private ArrayList<Utente> lista;
 	private ServerSocket server;
-	private ListaQuiz listaQuiz;
-	private Thread t;
-	private int port;
-	private int nGiocatori;
+	private QuizList quizList;
+	private ClientList clientList;
 	private int nQuiz;
+	private int nClient;
+	Thread t;
 	
-	public Server() {
-		lista = new ArrayList<Utente>();
-	}
-	
-	public void run() {
-		
-	}
-	
-	public void start(int port, int nGiocatori, int nQuiz) {
-		this.port = port;
-		this.nGiocatori = nGiocatori;
-		this.nQuiz = nQuiz;
-		
+	public Server(int port) {
 		try {
 			server = new ServerSocket(port);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		listaQuiz=new ListaQuiz();
+		quizList = new QuizList();
 		try {
-			caricaQuiz(listaQuiz);
+			quizList.caricaQuiz();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-				
+		clientList = new ClientList();
+		nQuiz = 1;
+		nClient = 1;
 		t = new Thread(this);
-		t.start();
 	}
 	
-	public void close()	{
-		for(int i = lista.size(); i > 0; i++) {
-			lista.get(i).endConnection();
-			lista.remove(i);
-		}
-		
-		try {
-			server.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		server=null;
-	}
-	
-	
-	public static void caricaQuiz(ListaQuiz quizModel) throws IOException {
-		BufferedReader fBuf = new BufferedReader(new FileReader("..\\QuizDuelloCarboneColussoForest\\resources\\quizData.txt"));
-		String[] vet;
-		String nextStr = fBuf.readLine();
-	    while(nextStr != null) {
-	    	vet = nextStr.split(";");
-	    	quizModel.getList().add(new Quiz(vet[0], vet[1], vet[2], vet[3], vet[4]));
-	        nextStr = fBuf.readLine();
-	    }
-	    fBuf.close();
-	}
-
-	public ArrayList<Utente> getLista() {
-		return lista;
-	}
-
-	public void setLista(ArrayList<Utente> lista) {
-		this.lista = lista;
-	}
-
-	public ServerSocket getServer() {
-		return server;
-	}
-
-	public void setServer(ServerSocket server) {
-		this.server = server;
-	}
-
-	public ListaQuiz getListaQuiz() {
-		return listaQuiz;
-	}
-
-	public void setListaQuiz(ListaQuiz listaQuiz) {
-		this.listaQuiz = listaQuiz;
-	}
-
-	public Thread getT() {
-		return t;
-	}
-
-	public void setT(Thread t) {
-		this.t = t;
-	}
-
-	public int getnGiocatori() {
-		return nGiocatori;
-	}
-
-	public void setnGiocatori(int nGiocatori) {
-		this.nGiocatori = nGiocatori;
-	}
-
 	public int getnQuiz() {
 		return nQuiz;
 	}
 
 	public void setnQuiz(int nQuiz) {
 		this.nQuiz = nQuiz;
+	}
+
+	public int getnClient() {
+		return nClient;
+	}
+
+	public void setnClient(int nClient) {
+		this.nClient = nClient;
+	}
+
+	public void run() {
+		while(true) {
+			while(clientList.getList().size() < nClient) {
+				Client now = new Client();
+				try {
+					now.setSocket(server.accept());
+					clientList.getList().add(now);
+					now.openChannels();
+					Reciver rec = new Reciver(now.getIn());
+					while(!rec.isArrived());
+					now.setNickname(rec.getMessage());
+					System.out.println("new user:" + now.getNickname());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	public void start() {
+		t.start();
+	}
+	
+	public void close()	{
+		clientList.closeConnections();		
+		try {
+			server.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		server = null;
 	}
 	
 }

@@ -41,7 +41,7 @@ public class FinestraGiocoClient extends JFrame {
 	}
 
 	public FinestraGiocoClient() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizDuelloCarboneColussoForest\\resources\\icon.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizDuello\\resources\\icon.png"));
 		setTitle("QuizDuello");
 		setResizable(false);
 		setAlwaysOnTop(true);

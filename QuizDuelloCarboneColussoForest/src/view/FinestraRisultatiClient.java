@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class FinestraRisultati extends JFrame {
+public class FinestraRisultatiClient extends JFrame {
 
 	private static final long serialVersionUID = 7025038189949051806L;
 	private JPanel contentPane;
@@ -27,7 +27,7 @@ public class FinestraRisultati extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FinestraRisultati frame = new FinestraRisultati();
+					FinestraRisultatiClient frame = new FinestraRisultatiClient();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,10 +36,10 @@ public class FinestraRisultati extends JFrame {
 		});
 	}
 
-	public FinestraRisultati() {
+	public FinestraRisultatiClient() {
 		setTitle("QuizDuello (Risultati)");
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizDuelloCarboneColussoForest\\resources\\icon.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizDuello\\resources\\icon.png"));
 		setAlwaysOnTop(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -76,10 +76,12 @@ public class FinestraRisultati extends JFrame {
 		contentPane.add(lblPerdente);
 		
 		btnRigioca = new JButton("Rigioca");
+		btnRigioca.setEnabled(false);
 		btnRigioca.setBounds(241, 204, 89, 23);
 		contentPane.add(btnRigioca);
 		
 		btnEsci = new JButton("Esci");
+		btnEsci.setEnabled(false);
 		btnEsci.setBounds(115, 204, 89, 23);
 		contentPane.add(btnEsci);
 	}

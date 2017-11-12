@@ -11,35 +11,36 @@ public class Reciver implements Runnable {
 	private Thread t;
 	
 	public Reciver(BufferedReader in) {
-		message = "";
+		message = null;
 		arrived = false;
 		this.in = in;
-		this.start();
-	}
-	
-	public void run() {	
-		
-		try {
-			message = in.readLine();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		arrived = true;
-	
-	}
-	
-	public void start()	{
 		t = new Thread(this);
 		t.start();
+	}
+	
+	public void run() {
+		//while(!arrived) {
+			try {
+				System.out.println("prima");
+				message = in.readLine();
+				System.out.println("dopo, letto qualcosa");
+				arrived = true;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		//}
 	}
 
 	public String getMessage() {
 		return message;
 	}
-
+	
 	public boolean isArrived() {
 		return arrived;
 	}
 	
+	public void setArrived(boolean arrived) {
+		this.arrived = arrived;
+	}
+
 }

@@ -1,7 +1,3 @@
-Domanda000;RispostaVera;RispostaFalsa1;RispostaFalsa2;RispostaFalsa3
-Domandaaaa;RispostaVera;RispostaFalsa1;RispostaFalsa2;RispostaFalsa3
-Domandabbb;RispostaVera;RispostaFalsa1;RispostaFalsa2;RispostaFalsa3
-Domandaccc;RispostaVera;RispostaFalsa1;RispostaFalsa2;RispostaFalsa3
 Quando è nata la Formula1?;1950;1948;1952;1953
 Dove Bottas ha vinto la sua prima gara in F1?;Russia;Spagna;Austria;Monaco
 Quante volte Hamilton ha vinto il Gran Premio della Gran Bretagna?;5;4;3;Nessuna delle precedenti

@@ -56,4 +56,12 @@ public class Quiz {
 		this.false3 = false3;
 	}
 	
+	public boolean equals(Quiz x) {
+		return question.equals(x.question);
+	}
+
+	public String toString() {
+		return question + ";" + true1 + ";" + false1 + ";" + false2+ ";" + false3;
+	}
+	
 }
