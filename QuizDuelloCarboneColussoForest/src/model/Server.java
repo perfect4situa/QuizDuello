@@ -2,6 +2,7 @@ package model;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 
 public class Server implements Runnable {
 
@@ -47,22 +48,22 @@ public class Server implements Runnable {
 	}
 
 	public void run() {
-		while(true) {
+		//while(true) {
 			while(clientList.getList().size() < nClient) {
-				Client now = new Client();
+				Utente newFace;
 				try {
-					now.setSocket(server.accept());
-					clientList.getList().add(now);
-					now.openChannels();
-					Reciver rec = new Reciver(now.getIn());
-					while(!rec.isArrived());
-					now.setNickname(rec.getMessage());
-					System.out.println("new user:" + now.getNickname());
+					newFace=new Utente(server.accept());
+					clientList.getList().add(newFace);
+					System.out.println("new user:" + newFace.getNickname());
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
-		}
+			
+			clientList.sendAll("startGame");
+			
+			
+		//}
 	}
 	
 	public void start() {

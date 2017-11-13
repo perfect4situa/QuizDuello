@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.InetAddress;
@@ -42,21 +43,27 @@ public class ControllerClient implements ActionListener {
 		if(evt.getSource() == viewConnect.getBtnConnetti()) {
 			try {
 				client.connect(InetAddress.getByName(viewConnect.getIp().getText()), Integer.parseInt(viewConnect.getPorta().getText()));
-				System.out.println("socke" + client.getIn() + client.getOut());
 				if(viewConnect.getNickname().getText().equals("")) {
 					JOptionPane.showMessageDialog(viewConnect, "Inserisci un nickname", "Errore", JOptionPane.ERROR_MESSAGE);
 				} else {
+					client.openChannels();
 					client.setNickname(viewConnect.getNickname().getText());
 					String MSG = "newgame;" + client.getNickname();
-					System.out.println(MSG);
 					client.send(MSG);
+					if(client.recive().equals("startGame"))
+					{
+						viewGame.setVisible(true);
+						viewConnect.setVisible(false);
+					}
 				}
 			} catch (UnknownHostException e) {
 				JOptionPane.showMessageDialog(viewConnect, "L'indirizzo ip o la porta a cui ci si sta tentando di connettere non risponde", "Errore di connessione", JOptionPane.ERROR_MESSAGE);
 				e.printStackTrace();
+				viewConnect.getBtnConnetti().setBackground(Color.red);
 			} catch(NumberFormatException e) {
 				JOptionPane.showMessageDialog(viewConnect, "Inserire un numero di porta valido", "Errore di connessione", JOptionPane.ERROR_MESSAGE);
 				e.printStackTrace();
+				viewConnect.getBtnConnetti().setBackground(Color.red);
 			}
 		}
 		

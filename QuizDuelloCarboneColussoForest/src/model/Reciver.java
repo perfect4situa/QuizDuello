@@ -19,19 +19,20 @@ public class Reciver implements Runnable {
 	}
 	
 	public void run() {
-		//while(!arrived) {
+		while(true)
+		{
 			try {
-				System.out.println("prima");
 				message = in.readLine();
-				System.out.println("dopo, letto qualcosa");
 				arrived = true;
 			} catch (IOException e) {
 				e.printStackTrace();
+				break;
 			}
-		//}
+		}
 	}
 
 	public String getMessage() {
+		arrived=false;
 		return message;
 	}
 	

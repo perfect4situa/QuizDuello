@@ -4,29 +4,29 @@ import java.util.ArrayList;
 
 public class ClientList {
 	
-	private ArrayList<Client> list;
+	private ArrayList<Utente> list;
 	
 	public ClientList() {
-		list = new ArrayList<Client>();
+		list = new ArrayList<Utente>();
 	}
 
-	public ArrayList<Client> getList() {
+	public ArrayList<Utente> getList() {
 		return list;
 	}
 
-	public void setList(ArrayList<Client> list) {
+	public void setList(ArrayList<Utente> list) {
 		this.list = list;
 	}
 	
 	public void sendAll(String msg) {
-		for(Client temp : list) {
-			temp.send(msg);
+		for(Utente temp : list) {
+			temp.sendMsg(msg);
 		}
 	}
 	
 	public void closeConnections() {
-		for(Client temp : list) {
-			temp.disconnect();
+		for(Utente temp : list) {
+			temp.endConnection();
 		}
 	}
 

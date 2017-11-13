@@ -81,6 +81,13 @@ public class Client {
 		}
 	}
 	
+	public String recive()
+	{
+		while(!listener.isArrived());
+		
+		return listener.getMessage();
+	}
+	
 	public void send(String msg) {
 		new Sender(msg, out);
 		//out.println(msg);

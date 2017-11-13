@@ -18,7 +18,7 @@ public class QuizList {
 	}
 	
 	public void caricaQuiz() throws IOException {
-		BufferedReader fBuf = new BufferedReader(new FileReader("..\\QuizDuello\\resources\\quizData.txt"));
+		BufferedReader fBuf = new BufferedReader(new FileReader("..\\QuizDuelloCarboneColussoForest\\resources\\quizData.txt"));
 		String[] vet;
 		String nextStr = fBuf.readLine();
 	    while(nextStr != null) {

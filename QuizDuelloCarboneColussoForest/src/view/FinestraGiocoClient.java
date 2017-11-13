@@ -27,21 +27,8 @@ public class FinestraGiocoClient extends JFrame {
 	private JButton btnRisposta_2;
 	private JButton btnRisposta_3;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FinestraGiocoClient frame = new FinestraGiocoClient();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	public FinestraGiocoClient() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizDuello\\resources\\icon.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizDuelloCarboneColussoForest\\resources\\icon.png"));
 		setTitle("QuizDuello");
 		setResizable(false);
 		setAlwaysOnTop(true);
