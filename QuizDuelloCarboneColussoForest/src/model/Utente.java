@@ -10,18 +10,21 @@ import java.net.Socket;
 public class Utente {
 
 	private String nickname;
+	private Quiz quiz;
+	private boolean semaforo;
 	private Socket socket;
 	private int punteggio;
 	private BufferedReader in;
 	private PrintWriter out;
-	private Sender send;
-	private Reciver recive;
+	private ReciverServer recive;
 	
 	public Utente(Socket socket)
 	{
 		this.socket=socket;
 		this.openChannels();
-		this.reciveNickname();
+		quiz=null;
+		semaforo=false;
+		punteggio=0;
 	}
 	
 	private void openChannels() {
@@ -29,7 +32,7 @@ public class Utente {
 		try {
 			out = new PrintWriter(socket.getOutputStream(), true);
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			recive=new Reciver(in);
+			recive=new ReciverServer(in, this);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -52,19 +55,9 @@ public class Utente {
 		socket=null;
 	}
 	
-	private void reciveNickname()
-	{	
-		while(!recive.isArrived());
-		
-		if(recive.getMessage().startsWith("newgame;"));
-		{
-			nickname=recive.getMessage().substring(8);
-		}
-	}
-	
 	public void sendMsg(String msg)
 	{
-		send=new Sender(msg, this.out);
+		new Sender(msg, this.out);
 		
 	}
 
@@ -100,19 +93,12 @@ public class Utente {
 		this.out = out;
 	}
 
-	public Sender getSend() {
-		return send;
-	}
 
-	public void setSend(Sender send) {
-		this.send = send;
-	}
-
-	public Reciver getRecive() {
+	public ReciverServer getRecive() {
 		return recive;
 	}
 
-	public void setRecive(Reciver recive) {
+	public void setRecive(ReciverServer recive) {
 		this.recive = recive;
 	}
 
@@ -122,6 +108,22 @@ public class Utente {
 
 	public void setPunteggio(int punteggio) {
 		this.punteggio = punteggio;
+	}
+
+	public boolean isSemaforo() {
+		return semaforo;
+	}
+
+	public void setSemaforo(boolean semaforo) {
+		this.semaforo = semaforo;
+	}
+
+	public Quiz getQuiz() {
+		return quiz;
+	}
+
+	public void setQuiz(Quiz quiz) {
+		this.quiz = quiz;
 	}
 	
 	

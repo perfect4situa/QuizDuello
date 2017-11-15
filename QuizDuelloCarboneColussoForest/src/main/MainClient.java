@@ -10,7 +10,7 @@ public class MainClient {
 
 	public static void main(String[] args) {
 		@SuppressWarnings("unused")
-		ControllerClient ctrl = new ControllerClient(new Client(), new FinestraConnessioneClient(), new FinestraGiocoClient(), new FinestraRisultatiClient());
+		ControllerClient ctrl = new ControllerClient(new FinestraConnessioneClient(), new FinestraGiocoClient(), new FinestraRisultatiClient());
 	}
 
 }

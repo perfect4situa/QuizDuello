@@ -21,8 +21,7 @@ public class ControllerClient implements ActionListener {
 	private FinestraGiocoClient viewGame;
 	private FinestraRisultatiClient viewEnd;
 
-	public ControllerClient(Client client, FinestraConnessioneClient viewConnect, FinestraGiocoClient viewGame, FinestraRisultatiClient viewEnd) {
-		this.client = client;
+	public ControllerClient(FinestraConnessioneClient viewConnect, FinestraGiocoClient viewGame, FinestraRisultatiClient viewEnd) {
 		viewConnect.getBtnConnetti().addActionListener(this);
 		viewConnect.setVisible(true);
 		this.viewConnect = viewConnect;
@@ -36,55 +35,54 @@ public class ControllerClient implements ActionListener {
 		viewEnd.getBtnEsci().addActionListener(this);
 		viewEnd.setVisible(false);
 		this.viewEnd = viewEnd;
+		this.client=new Client(viewConnect, viewGame, viewEnd);
 	}
 
 	public void actionPerformed(ActionEvent evt) {
 		
-		if(evt.getSource() == viewConnect.getBtnConnetti()) {
-			try {
-				client.connect(InetAddress.getByName(viewConnect.getIp().getText()), Integer.parseInt(viewConnect.getPorta().getText()));
-				if(viewConnect.getNickname().getText().equals("")) {
-					JOptionPane.showMessageDialog(viewConnect, "Inserisci un nickname", "Errore", JOptionPane.ERROR_MESSAGE);
-				} else {
-					client.openChannels();
-					client.setNickname(viewConnect.getNickname().getText());
-					String MSG = "newgame;" + client.getNickname();
-					client.send(MSG);
-					if(client.recive().equals("startGame"))
-					{
-						viewGame.setVisible(true);
-						viewConnect.setVisible(false);
+		if(client.isSemaforo())
+		{
+			if(evt.getSource() == viewConnect.getBtnConnetti()) {
+				try {
+					client.connect(InetAddress.getByName(viewConnect.getIp().getText()), Integer.parseInt(viewConnect.getPorta().getText()));
+					if(viewConnect.getNickname().getText().equals("")) {
+						JOptionPane.showMessageDialog(viewConnect, "Inserisci un nickname", "Errore", JOptionPane.ERROR_MESSAGE);
+					} else {
+						client.openChannels();
+						client.setNickname(viewConnect.getNickname().getText());
+						client.send("newGame;"+client.getNickname());
+						client.setSemaforo(false);
 					}
+				} catch (UnknownHostException e) {
+					JOptionPane.showMessageDialog(viewConnect, "L'indirizzo ip o la porta a cui ci si sta tentando di connettere non risponde", "Errore di connessione", JOptionPane.ERROR_MESSAGE);
+					e.printStackTrace();
+					viewConnect.getBtnConnetti().setBackground(Color.red);
+				} catch(NumberFormatException e) {
+					JOptionPane.showMessageDialog(viewConnect, "Inserire un numero di porta valido", "Errore di connessione", JOptionPane.ERROR_MESSAGE);
+					e.printStackTrace();
+					viewConnect.getBtnConnetti().setBackground(Color.red);
 				}
-			} catch (UnknownHostException e) {
-				JOptionPane.showMessageDialog(viewConnect, "L'indirizzo ip o la porta a cui ci si sta tentando di connettere non risponde", "Errore di connessione", JOptionPane.ERROR_MESSAGE);
-				e.printStackTrace();
-				viewConnect.getBtnConnetti().setBackground(Color.red);
-			} catch(NumberFormatException e) {
-				JOptionPane.showMessageDialog(viewConnect, "Inserire un numero di porta valido", "Errore di connessione", JOptionPane.ERROR_MESSAGE);
-				e.printStackTrace();
-				viewConnect.getBtnConnetti().setBackground(Color.red);
 			}
-		}
-		
-		if(evt.getSource() == viewGame.getBtnRisposta()) {
-			Quiz risp = new Quiz(viewGame.getLblDomanda().getText(), viewGame.getBtnRisposta().getText(), viewGame.getBtnRisposta_1().getText(), viewGame.getBtnRisposta_2().getText(), viewGame.getBtnRisposta_3().getText());
-			client.send(risp.toString());
-		}
-		
-		if(evt.getSource() == viewGame.getBtnRisposta_1()) {
-			Quiz risp = new Quiz(viewGame.getLblDomanda().getText(), viewGame.getBtnRisposta_1().getText(), viewGame.getBtnRisposta().getText(), viewGame.getBtnRisposta_2().getText(), viewGame.getBtnRisposta_3().getText());
-			client.send(risp.toString());
-		}
-		
-		if(evt.getSource() == viewGame.getBtnRisposta_2()) {
-			Quiz risp = new Quiz(viewGame.getLblDomanda().getText(), viewGame.getBtnRisposta_2().getText(), viewGame.getBtnRisposta().getText(), viewGame.getBtnRisposta_1().getText(), viewGame.getBtnRisposta_3().getText());
-			client.send(risp.toString());
-		}
-		
-		if(evt.getSource() == viewGame.getBtnRisposta_3()) {
-			Quiz risp = new Quiz(viewGame.getLblDomanda().getText(), viewGame.getBtnRisposta_3().getText(), viewGame.getBtnRisposta().getText(), viewGame.getBtnRisposta_1().getText(), viewGame.getBtnRisposta_2().getText());
-			client.send(risp.toString());
+			
+			if(evt.getSource() == viewGame.getBtnRisposta()) {
+				Quiz risp = new Quiz(viewGame.getLblDomanda().getText(), viewGame.getBtnRisposta().getText(), viewGame.getBtnRisposta_1().getText(), viewGame.getBtnRisposta_2().getText(), viewGame.getBtnRisposta_3().getText());
+				client.send("answer;"+risp.toString());
+			}
+			
+			if(evt.getSource() == viewGame.getBtnRisposta_1()) {
+				Quiz risp = new Quiz(viewGame.getLblDomanda().getText(), viewGame.getBtnRisposta_1().getText(), viewGame.getBtnRisposta().getText(), viewGame.getBtnRisposta_2().getText(), viewGame.getBtnRisposta_3().getText());
+				client.send("answer;"+risp.toString());
+			}
+			
+			if(evt.getSource() == viewGame.getBtnRisposta_2()) {
+				Quiz risp = new Quiz(viewGame.getLblDomanda().getText(), viewGame.getBtnRisposta_2().getText(), viewGame.getBtnRisposta().getText(), viewGame.getBtnRisposta_1().getText(), viewGame.getBtnRisposta_3().getText());
+				client.send("answer;"+risp.toString());
+			}
+			
+			if(evt.getSource() == viewGame.getBtnRisposta_3()) {
+				Quiz risp = new Quiz(viewGame.getLblDomanda().getText(), viewGame.getBtnRisposta_3().getText(), viewGame.getBtnRisposta().getText(), viewGame.getBtnRisposta_1().getText(), viewGame.getBtnRisposta_2().getText());
+				client.send("answer;"+risp.toString());
+			}
 		}
 		
 		if(evt.getSource() == viewEnd.getBtnRigioca()) {

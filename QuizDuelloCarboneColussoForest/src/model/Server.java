@@ -19,12 +19,6 @@ public class Server implements Runnable {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		quizList = new QuizList();
-		try {
-			quizList.caricaQuiz();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		clientList = new ClientList();
 		nQuiz = 1;
 		nClient = 1;
@@ -48,21 +42,50 @@ public class Server implements Runnable {
 	}
 
 	public void run() {
+		
+		quizList=new QuizList(nQuiz);
+		try {
+			quizList.caricaQuiz();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		//while(true) {
 			while(clientList.getList().size() < nClient) {
 				Utente newFace;
 				try {
 					newFace=new Utente(server.accept());
 					clientList.getList().add(newFace);
-					System.out.println("new user:" + newFace.getNickname());
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
 			
-			clientList.sendAll("startGame");
+			while(!clientList.allReady());
 			
+			String temp;
 			
+			temp="startGame";
+			
+			for(int i=0;i<clientList.getList().size();i++)
+			{
+				temp+=";"+clientList.getList().get(i).getNickname();
+				
+				System.out.println(clientList.getList().get(i).getNickname());
+			}
+			
+			clientList.sendAll(temp);
+			
+			while(quizList.getIndex()<nQuiz)
+			{
+				while(!clientList.allReady());
+				
+				clientList.sendQuiz(quizList.take());
+			}
+				
+			while(!clientList.allReady());
+			
+			clientList.winner();
 		//}
 	}
 	

@@ -7,21 +7,37 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 
-public class Client {
+import view.FinestraConnessioneClient;
+import view.FinestraGiocoClient;
+import view.FinestraRisultatiClient;
+
+public class Client{
 
 	private Socket socket;
 	private BufferedReader in;
 	private PrintWriter out;
-	private Reciver listener;
+	private ReciverClient listener;
 	private String nickname;
+	private boolean semaforo;
+	private FinestraConnessioneClient viewConnect;
+	private FinestraGiocoClient viewGame;
+	private FinestraRisultatiClient viewEnd;
 	
-	public Client() {
+	public Client(FinestraConnessioneClient viewConnect, FinestraGiocoClient viewGame, FinestraRisultatiClient viewEnd) {
+		//so già che non ti piacerà colusso ma a meno di non bloccare tutta la grafica il modo migliore è questo, comunque
+		//rispetta l'MCXV dato che il model deve occuparsi solo degli input utente e non quelli che arrivano dall'esterno
+		this.viewConnect=viewConnect;
+		this.viewGame=viewGame;
+		this.viewEnd=viewEnd;
+		
 		socket = null;
 		in = null;
 		out = null;
 		listener = null;
 		nickname = null;
-	}	
+		semaforo=true;
+	}
+	
 	
 	public Socket getSocket() {
 		return socket;
@@ -47,14 +63,6 @@ public class Client {
 		this.out = out;
 	}
 
-	public Reciver getListener() {
-		return listener;
-	}
-
-	public void setListener(Reciver listener) {
-		this.listener = listener;
-	}
-
 	public String getNickname() {
 		return nickname;
 	}
@@ -62,6 +70,35 @@ public class Client {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
+	
+	
+
+	public boolean isSemaforo() {
+		return semaforo;
+	}
+
+
+
+	public void setSemaforo(boolean semaforo) {
+		this.semaforo = semaforo;
+	}
+
+	
+
+	public FinestraConnessioneClient getViewConnect() {
+		return viewConnect;
+	}
+
+
+	public FinestraGiocoClient getViewGame() {
+		return viewGame;
+	}
+
+
+	public FinestraRisultatiClient getViewEnd() {
+		return viewEnd;
+	}
+
 
 	public void connect(InetAddress ip, int port) {
 		try {
@@ -75,24 +112,17 @@ public class Client {
 		try {
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = new PrintWriter(socket.getOutputStream(), true);
-			listener = new Reciver(in);
+			listener = new ReciverClient(in, this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public String recive()
+	public void send(String msg)
 	{
-		while(!listener.isArrived());
-		
-		return listener.getMessage();
-	}
-	
-	public void send(String msg) {
 		new Sender(msg, out);
-		//out.println(msg);
 	}
-	
+
 	public void disconnect() {
 		try {
 			in.close();
@@ -106,5 +136,6 @@ public class Client {
 		out = null;
 		socket = null;
 	}
+
 	
 }
