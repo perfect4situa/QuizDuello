@@ -1,7 +1,5 @@
 package view;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -21,19 +19,6 @@ public class FinestraConnessioneClient extends JFrame {
 	private JLabel lblNickname;
 	private JTextField nickname;
 	private JButton btnConnetti;
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FinestraConnessioneClient frame = new FinestraConnessioneClient();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	public FinestraConnessioneClient() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizDuello\\resources\\icon.png"));

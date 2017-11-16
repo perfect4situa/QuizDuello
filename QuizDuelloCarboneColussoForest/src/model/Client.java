@@ -11,7 +11,7 @@ import view.FinestraConnessioneClient;
 import view.FinestraGiocoClient;
 import view.FinestraRisultatiClient;
 
-public class Client{
+public class Client {
 
 	private Socket socket;
 	private BufferedReader in;
@@ -24,20 +24,17 @@ public class Client{
 	private FinestraRisultatiClient viewEnd;
 	
 	public Client(FinestraConnessioneClient viewConnect, FinestraGiocoClient viewGame, FinestraRisultatiClient viewEnd) {
-		//so già che non ti piacerà colusso ma a meno di non bloccare tutta la grafica il modo migliore è questo, comunque
-		//rispetta l'MCXV dato che il model deve occuparsi solo degli input utente e non quelli che arrivano dall'esterno
-		this.viewConnect=viewConnect;
-		this.viewGame=viewGame;
-		this.viewEnd=viewEnd;
+		this.viewConnect = viewConnect;
+		this.viewGame = viewGame;
+		this.viewEnd = viewEnd;
 		
 		socket = null;
 		in = null;
 		out = null;
 		listener = null;
 		nickname = null;
-		semaforo=true;
+		semaforo = true;
 	}
-	
 	
 	public Socket getSocket() {
 		return socket;
@@ -70,46 +67,30 @@ public class Client{
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	
-	
 
 	public boolean isSemaforo() {
 		return semaforo;
 	}
 
-
-
 	public void setSemaforo(boolean semaforo) {
 		this.semaforo = semaforo;
 	}
-
-	
 
 	public FinestraConnessioneClient getViewConnect() {
 		return viewConnect;
 	}
 
-
 	public FinestraGiocoClient getViewGame() {
 		return viewGame;
 	}
-
 
 	public FinestraRisultatiClient getViewEnd() {
 		return viewEnd;
 	}
 
-
 	public void connect(InetAddress ip, int port) {
 		try {
 			socket = new Socket(ip, port);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void openChannels() {
-		try {
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = new PrintWriter(socket.getOutputStream(), true);
 			listener = new ReciverClient(in, this);
@@ -118,8 +99,7 @@ public class Client{
 		}
 	}
 	
-	public void send(String msg)
-	{
+	public void send(String msg) {
 		new Sender(msg, out);
 	}
 
@@ -136,6 +116,5 @@ public class Client{
 		out = null;
 		socket = null;
 	}
-
 	
 }

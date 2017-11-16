@@ -13,15 +13,13 @@ public class QuizList {
 	
 	public QuizList(int n) {
 		list = new ArrayList<Quiz>();
-		used=new int[n];
-		index=0;
+		used = new int[n];
+		index = 0;
 	}
 	
 	public ArrayList<Quiz> getList() {
 		return list;
 	}
-	
-	
 	
 	public int getIndex() {
 		return index;
@@ -31,34 +29,21 @@ public class QuizList {
 		this.index = index;
 	}
 
-	public Quiz take()
-	{
-		int x=-1;
+	public Quiz take() {
+		int x = -1;
 		boolean flag;
-		
-		
-		do
-		{
-			flag=true;
-			
-			x=(int)(Math.random()*list.size());
-			
-			
-			for(int i=0;i<index;i++)
-			{
-				if(used[i]==x)
-				{
-					flag=false;
+		do {
+			flag = true;
+			x = (int)(Math.random()*list.size());
+			for(int i = 0; i < index; i++) {
+				if(used[i] == x) {
+					flag = false;
 				}
 			}
 		}
-		while(!flag || x<0 || x>=list.size());
-			
-			
-		used[index]=x;
-		
+		while(!flag || x < 0 || x >= list.size());
+		used[index] = x;
 		index++;
-		
 		return list.get(x);
 	}
 	

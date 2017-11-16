@@ -1,7 +1,5 @@
 package view;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Toolkit;
@@ -21,7 +19,7 @@ public class FinestraGiocoClient extends JFrame {
 	private JProgressBar progressBar;
 	private JScrollPane scrollPane;
 	private JList<String> list;
-	private DefaultListModel modello;
+	private DefaultListModel<String> modello;
 	private JLabel lblInfo;
 	private JLabel lblDomanda;
 	private JButton btnRisposta;
@@ -54,7 +52,7 @@ public class FinestraGiocoClient extends JFrame {
 		list = new JList<String>();
 		list.setToolTipText("Giocatori");
 		
-		modello=new DefaultListModel();
+		modello = new DefaultListModel<String>();
 		list.setModel(modello);
 		scrollPane.setViewportView(list);
 		
@@ -142,11 +140,11 @@ public class FinestraGiocoClient extends JFrame {
 		this.btnRisposta_3 = btnRisposta_3;
 	}
 
-	public DefaultListModel getModello() {
+	public DefaultListModel<String> getModello() {
 		return modello;
 	}
 
-	public void setModello(DefaultListModel modello) {
+	public void setModello(DefaultListModel<String> modello) {
 		this.modello = modello;
 	}
 
@@ -158,12 +156,12 @@ public class FinestraGiocoClient extends JFrame {
 		this.lblInfo = lblInfo;
 	}
 	
-	public void clearColors()
-	{
-		this.lblInfo.setBackground(null);
-		this.btnRisposta.setBackground(null);
-		this.btnRisposta_1.setBackground(null);
-		this.btnRisposta_2.setBackground(null);
-		this.btnRisposta_3.setBackground(null);
+	public void clearColors() {
+		lblInfo.setBackground(null);
+		btnRisposta.setBackground(null);
+		btnRisposta_1.setBackground(null);
+		btnRisposta_2.setBackground(null);
+		btnRisposta_3.setBackground(null);
 	}
+	
 }

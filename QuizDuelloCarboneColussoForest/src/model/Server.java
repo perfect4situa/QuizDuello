@@ -2,7 +2,6 @@ package model;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-import java.net.Socket;
 
 public class Server implements Runnable {
 
@@ -42,7 +41,6 @@ public class Server implements Runnable {
 	}
 
 	public void run() {
-		
 		quizList=new QuizList(nQuiz);
 		try {
 			quizList.caricaQuiz();
@@ -54,7 +52,7 @@ public class Server implements Runnable {
 			while(clientList.getList().size() < nClient) {
 				Utente newFace;
 				try {
-					newFace=new Utente(server.accept());
+					newFace = new Utente(server.accept());
 					clientList.getList().add(newFace);
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -63,26 +61,19 @@ public class Server implements Runnable {
 			
 			while(!clientList.allReady());
 			
-			String temp;
-			
-			temp="startGame";
-			
-			for(int i=0;i<clientList.getList().size();i++)
-			{
-				temp+=";"+clientList.getList().get(i).getNickname();
+			String msg = "startGame";
+			for(int i = 0; i < clientList.getList().size(); i++) {
+				msg += ";" + clientList.getList().get(i).getNickname();
 				
 				System.out.println(clientList.getList().get(i).getNickname());
 			}
+			clientList.sendAll(msg);
 			
-			clientList.sendAll(temp);
-			
-			while(quizList.getIndex()<nQuiz)
-			{
+			while(quizList.getIndex() < nQuiz) {
 				while(!clientList.allReady());
-				
 				clientList.sendQuiz(quizList.take());
 			}
-				
+			
 			while(!clientList.allReady());
 			
 			clientList.winner();

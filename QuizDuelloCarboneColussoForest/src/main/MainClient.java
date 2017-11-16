@@ -1,6 +1,5 @@
 package main;
 
-import model.Client;
 import controller.ControllerClient;
 import view.FinestraConnessioneClient;
 import view.FinestraGiocoClient;

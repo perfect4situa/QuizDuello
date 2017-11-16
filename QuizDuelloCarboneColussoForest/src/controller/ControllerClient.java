@@ -35,22 +35,22 @@ public class ControllerClient implements ActionListener {
 		viewEnd.getBtnEsci().addActionListener(this);
 		viewEnd.setVisible(false);
 		this.viewEnd = viewEnd;
-		this.client=new Client(viewConnect, viewGame, viewEnd);
+		this.client = new Client(viewConnect, viewGame, viewEnd);
 	}
 
 	public void actionPerformed(ActionEvent evt) {
 		
-		if(client.isSemaforo())
-		{
+		if(client.isSemaforo())	{
 			if(evt.getSource() == viewConnect.getBtnConnetti()) {
 				try {
-					client.connect(InetAddress.getByName(viewConnect.getIp().getText()), Integer.parseInt(viewConnect.getPorta().getText()));
+					InetAddress ip = InetAddress.getByName(viewConnect.getIp().getText());
+					int port = Integer.parseInt(viewConnect.getPorta().getText());
 					if(viewConnect.getNickname().getText().equals("")) {
 						JOptionPane.showMessageDialog(viewConnect, "Inserisci un nickname", "Errore", JOptionPane.ERROR_MESSAGE);
 					} else {
-						client.openChannels();
+						client.connect(ip, port);
 						client.setNickname(viewConnect.getNickname().getText());
-						client.send("newGame;"+client.getNickname());
+						client.send("newGame;" + client.getNickname());
 						client.setSemaforo(false);
 					}
 				} catch (UnknownHostException e) {
@@ -66,22 +66,22 @@ public class ControllerClient implements ActionListener {
 			
 			if(evt.getSource() == viewGame.getBtnRisposta()) {
 				Quiz risp = new Quiz(viewGame.getLblDomanda().getText(), viewGame.getBtnRisposta().getText(), viewGame.getBtnRisposta_1().getText(), viewGame.getBtnRisposta_2().getText(), viewGame.getBtnRisposta_3().getText());
-				client.send("answer;"+risp.toString());
+				client.send("answer;" + risp.toString());
 			}
 			
 			if(evt.getSource() == viewGame.getBtnRisposta_1()) {
 				Quiz risp = new Quiz(viewGame.getLblDomanda().getText(), viewGame.getBtnRisposta_1().getText(), viewGame.getBtnRisposta().getText(), viewGame.getBtnRisposta_2().getText(), viewGame.getBtnRisposta_3().getText());
-				client.send("answer;"+risp.toString());
+				client.send("answer;" + risp.toString());
 			}
 			
 			if(evt.getSource() == viewGame.getBtnRisposta_2()) {
 				Quiz risp = new Quiz(viewGame.getLblDomanda().getText(), viewGame.getBtnRisposta_2().getText(), viewGame.getBtnRisposta().getText(), viewGame.getBtnRisposta_1().getText(), viewGame.getBtnRisposta_3().getText());
-				client.send("answer;"+risp.toString());
+				client.send("answer;" + risp.toString());
 			}
 			
 			if(evt.getSource() == viewGame.getBtnRisposta_3()) {
 				Quiz risp = new Quiz(viewGame.getLblDomanda().getText(), viewGame.getBtnRisposta_3().getText(), viewGame.getBtnRisposta().getText(), viewGame.getBtnRisposta_1().getText(), viewGame.getBtnRisposta_2().getText());
-				client.send("answer;"+risp.toString());
+				client.send("answer;" + risp.toString());
 			}
 		}
 		

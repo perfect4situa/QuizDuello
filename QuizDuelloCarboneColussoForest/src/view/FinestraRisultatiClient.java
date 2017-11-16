@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
 
@@ -22,19 +21,6 @@ public class FinestraRisultatiClient extends JFrame {
 	private JLabel lblPerdente;
 	private JButton btnRigioca;
 	private JButton btnEsci;
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FinestraRisultatiClient frame = new FinestraRisultatiClient();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	public FinestraRisultatiClient() {
 		setTitle("QuizDuello (Risultati)");

@@ -3,50 +3,44 @@ package model;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 
 public class Utente {
 
 	private String nickname;
+	private int punteggio;
 	private Quiz quiz;
 	private boolean semaforo;
 	private Socket socket;
-	private int punteggio;
 	private BufferedReader in;
 	private PrintWriter out;
 	private ReciverServer recive;
 	
-	public Utente(Socket socket)
-	{
-		this.socket=socket;
+	public Utente(Socket socket) {
+		this.socket = socket;
 		this.openChannels();
-		quiz=null;
-		semaforo=false;
-		punteggio=0;
+		quiz = null;
+		semaforo = false;
+		punteggio = 0;
 	}
 	
 	private void openChannels() {
-
 		try {
 			out = new PrintWriter(socket.getOutputStream(), true);
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			recive=new ReciverServer(in, this);
+			recive = new ReciverServer(in, this);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	public void endConnection()
-	{
+	public void endConnection() {
 		try {
 			in.close();
 			out.close();
 			socket.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -55,10 +49,8 @@ public class Utente {
 		socket=null;
 	}
 	
-	public void sendMsg(String msg)
-	{
-		new Sender(msg, this.out);
-		
+	public void sendMsg(String msg)	{
+		new Sender(msg, out);
 	}
 
 	public String getNickname() {
@@ -93,7 +85,6 @@ public class Utente {
 		this.out = out;
 	}
 
-
 	public ReciverServer getRecive() {
 		return recive;
 	}
@@ -126,7 +117,4 @@ public class Utente {
 		this.quiz = quiz;
 	}
 	
-	
 }
-
-

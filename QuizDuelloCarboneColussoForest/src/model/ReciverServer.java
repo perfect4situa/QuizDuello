@@ -14,55 +14,42 @@ public class ReciverServer implements Runnable {
 	public ReciverServer(BufferedReader in, Utente utente) {
 		message = null;
 		this.in = in;
-		this.utente=utente;
+		this.utente = utente;
 		t = new Thread(this);
 		t.start();
 	}
 	
 	public void run() {
 		String[] vet;
-		
-		while(true)
-		{
+		while(true)	{
 			try {
 				message = in.readLine();
 			} catch (IOException e) {
 				e.printStackTrace();
 				break;
 			}
-			
 			vet=message.split(";");
 			
-			switch(vet[0])
-			{
+			switch(vet[0]) {
 				case "newGame":
-					
 					utente.setNickname(vet[1]);
-				
 					utente.setSemaforo(true);
 				break;
 				
 				case "answer":
-					
-					if(vet[1].equals(utente.getQuiz().getQuestion()) && vet[2].equals(utente.getQuiz().getTrue1()))
-					{
-						utente.sendMsg("result;true;"+utente.getQuiz().toString());
+					if(vet[1].equals(utente.getQuiz().getQuestion()) && vet[2].equals(utente.getQuiz().getTrue1()))	{
+						utente.sendMsg("result;true;" + utente.getQuiz().toString());
 						utente.setPunteggio(utente.getPunteggio()+1);
 					}
-					else
-					{
-						utente.sendMsg("result;false;"+utente.getQuiz().toString());
+					else {
+						utente.sendMsg("result;false;" + utente.getQuiz().toString());
 					}
-					
-				try {
-					TimeUnit.SECONDS.sleep(5);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-					
+					try {
+						TimeUnit.SECONDS.sleep(5);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 					utente.setSemaforo(true);
-					
 				break;
 			}
 		}

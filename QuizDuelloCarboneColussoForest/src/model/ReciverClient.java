@@ -14,17 +14,18 @@ public class ReciverClient implements Runnable {
 	public ReciverClient(BufferedReader in, Client client) {
 		message = null;
 		this.in = in;
-		this.client=client;
+		this.client = client;
 		t = new Thread(this);
 		t.start();
 	}
 	
+	public String getMessage() {
+		return message;
+	}
+	
 	public void run() {
-		
 		String[] vet;
-		
-		while(true)
-		{
+		while(true)	{
 			try {
 				message = in.readLine();
 			} catch (IOException e) {
@@ -34,55 +35,40 @@ public class ReciverClient implements Runnable {
 			
 			vet=message.split(";");
 			
-			switch(vet[0])
-			{
+			switch(vet[0]) {
 				case "startGame":
-					
 					client.getViewConnect().setVisible(false);
 					client.getViewGame().setVisible(true);
 					client.getViewGame().getModello().clear();
-					
-					
 					for(String temp : vet) {
-						
-						if(!temp.equals(client.getNickname()) && !temp.equals("startGame"))
-						{
+						if(!temp.equals(client.getNickname()) && !temp.equals("startGame"))	{
 							client.getViewGame().getModello().addElement(temp);
 						}
 					}
-				
 				break;
 				
 				case "question":
-					
 					client.getViewGame().clearColors();
-					
 					client.getViewGame().getLblDomanda().setText(vet[1]);
 					client.getViewGame().getBtnRisposta().setText(vet[2]);
 					client.getViewGame().getBtnRisposta_1().setText(vet[3]);
 					client.getViewGame().getBtnRisposta_2().setText(vet[4]);
 					client.getViewGame().getBtnRisposta_3().setText(vet[5]);
-					
 					client.setSemaforo(true);
 				break;
 				
 				case "result":
-					
-					if(vet[2].equals(client.getViewGame().getLblDomanda().getText()))
-					{
-						if(vet[1].equals("true"))
-						{
+					if(vet[2].equals(client.getViewGame().getLblDomanda().getText())) {
+						if(vet[1].equals("true")) {
 							client.getViewGame().getLblInfo().setText("RISPOSTA ESATTA!!");
 							client.getViewGame().getLblInfo().setBackground(Color.green);
 						}
-						else
-						{
+						else {
 							client.getViewGame().getLblInfo().setText("RISPOSTA Errata!!");
 							client.getViewGame().getLblInfo().setBackground(Color.red);
 						}
 						
-						if(client.getViewGame().getBtnRisposta().getText().equals(vet[3]))
-						{
+						if(client.getViewGame().getBtnRisposta().getText().equals(vet[3])) {
 							client.getViewGame().getBtnRisposta().setBackground(Color.green);
 						}
 						else if(client.getViewGame().getBtnRisposta_1().getText().equals(vet[3]))
@@ -98,34 +84,23 @@ public class ReciverClient implements Runnable {
 							client.getViewGame().getBtnRisposta_3().setBackground(Color.green);
 						}
 					}
-					
 					client.setSemaforo(false);
 				break;
 				
 				case "endGame":
-					
-					if(vet[1].equals(client.getNickname()))
-					{
+					if(vet[1].equals(client.getNickname())) {
 						client.getViewGame().getLblInfo().setText("!!!!Hai vinto!!!!!");
 						client.getViewGame().getLblInfo().setBackground(Color.green);
 					}
-					else
-					{
-						client.getViewGame().getLblInfo().setText("Hai perso, ha vinto "+vet[1]);
+					else {
+						client.getViewGame().getLblInfo().setText("Hai perso, ha vinto " + vet[1]);
 						client.getViewGame().getLblInfo().setBackground(Color.red);
 					}
-					
-					
 					client.getViewGame().setVisible(false);
 					client.getViewEnd().setVisible(true);
-					
 				break;
 			}
 		}
-	}
-
-	public String getMessage() {
-		return message;
 	}
 	
 }
