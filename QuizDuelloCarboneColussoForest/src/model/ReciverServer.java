@@ -2,6 +2,7 @@ package model;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class ReciverServer implements Runnable {
 
@@ -53,6 +54,12 @@ public class ReciverServer implements Runnable {
 						utente.sendMsg("result;false;"+utente.getQuiz().toString());
 					}
 					
+				try {
+					TimeUnit.SECONDS.sleep(5);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 					
 					utente.setSemaforo(true);
 					

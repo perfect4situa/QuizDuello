@@ -68,9 +68,9 @@ public class ReciverClient implements Runnable {
 				
 				case "result":
 					
-					if(vet[2].equals(client.getViewGame().getLblDomanda()))
+					if(vet[2].equals(client.getViewGame().getLblDomanda().getText()))
 					{
-						if(vet[1].equals(true))
+						if(vet[1].equals("true"))
 						{
 							client.getViewGame().getLblInfo().setText("RISPOSTA ESATTA!!");
 							client.getViewGame().getLblInfo().setBackground(Color.green);
@@ -81,19 +81,19 @@ public class ReciverClient implements Runnable {
 							client.getViewGame().getLblInfo().setBackground(Color.red);
 						}
 						
-						if(client.getViewGame().getBtnRisposta().getText().equals(vet[2]))
+						if(client.getViewGame().getBtnRisposta().getText().equals(vet[3]))
 						{
 							client.getViewGame().getBtnRisposta().setBackground(Color.green);
 						}
-						else if(client.getViewGame().getBtnRisposta_1().getText().equals(vet[2]))
+						else if(client.getViewGame().getBtnRisposta_1().getText().equals(vet[3]))
 						{
 							client.getViewGame().getBtnRisposta_1().setBackground(Color.green);
 						}
-						else if(client.getViewGame().getBtnRisposta_2().getText().equals(vet[2]))
+						else if(client.getViewGame().getBtnRisposta_2().getText().equals(vet[3]))
 						{
 							client.getViewGame().getBtnRisposta_2().setBackground(Color.green);
 						}
-						else if(client.getViewGame().getBtnRisposta_3().getText().equals(vet[2]))
+						else if(client.getViewGame().getBtnRisposta_3().getText().equals(vet[3]))
 						{
 							client.getViewGame().getBtnRisposta_3().setBackground(Color.green);
 						}

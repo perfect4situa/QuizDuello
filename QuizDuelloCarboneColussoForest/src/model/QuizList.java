@@ -41,7 +41,7 @@ public class QuizList {
 		{
 			flag=true;
 			
-			x=(int)(Math.random()*list.size())-1;
+			x=(int)(Math.random()*list.size());
 			
 			
 			for(int i=0;i<index;i++)
@@ -52,7 +52,7 @@ public class QuizList {
 				}
 			}
 		}
-		while(!flag);
+		while(!flag || x<0 || x>=list.size());
 			
 			
 		used[index]=x;
