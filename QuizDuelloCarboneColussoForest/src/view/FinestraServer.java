@@ -31,7 +31,7 @@ public class FinestraServer extends JFrame {
 	private JLabel lblOnOff;
 
 	public FinestraServer() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizDuello\\resources\\icon.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizDuelloCarboneColussoForest\\resources\\icon.png"));
 		setTitle("QuizDuello (Server)");
 		setResizable(false);
 		setAlwaysOnTop(true);

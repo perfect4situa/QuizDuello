@@ -3,6 +3,7 @@ package model;
 import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class ReciverClient implements Runnable {
 
@@ -32,7 +33,6 @@ public class ReciverClient implements Runnable {
 				e.printStackTrace();
 				break;
 			}
-			
 			vet=message.split(";");
 			
 			switch(vet[0]) {
@@ -55,6 +55,17 @@ public class ReciverClient implements Runnable {
 					client.getViewGame().getBtnRisposta_2().setText(vet[4]);
 					client.getViewGame().getBtnRisposta_3().setText(vet[5]);
 					client.setSemaforo(true);
+					/*int count = 0;
+					while(count < 5) {
+						try {
+							TimeUnit.SECONDS.sleep(1);
+							client.getViewGame().getProgressBar().setValue(client.getViewGame().getProgressBar().getValue() + 20);
+							count++;
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+					client.getViewGame().getProgressBar().setValue(0);*/
 				break;
 				
 				case "result":
@@ -88,13 +99,14 @@ public class ReciverClient implements Runnable {
 				break;
 				
 				case "endGame":
+					client.getViewEnd().getLblPlayer().setText(vet[1]);
 					if(vet[1].equals(client.getNickname())) {
-						client.getViewGame().getLblInfo().setText("!!!!Hai vinto!!!!!");
-						client.getViewGame().getLblInfo().setBackground(Color.green);
+						client.getViewEnd().getLblPerdente().setText("!!Hai VINTO!!");
+						client.getViewEnd().getLblPerdente().setBackground(Color.GREEN);
 					}
 					else {
-						client.getViewGame().getLblInfo().setText("Hai perso, ha vinto " + vet[1]);
-						client.getViewGame().getLblInfo().setBackground(Color.red);
+						client.getViewEnd().getLblPerdente().setText("Hai perso :(");
+						client.getViewEnd().getLblPerdente().setBackground(Color.RED);
 					}
 					client.getViewGame().setVisible(false);
 					client.getViewEnd().setVisible(true);

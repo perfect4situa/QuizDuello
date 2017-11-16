@@ -8,6 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FinestraRisultatiClient extends JFrame {
 
@@ -15,9 +17,7 @@ public class FinestraRisultatiClient extends JFrame {
 	private JPanel contentPane;
 	private JLabel lblVincente;
 	private JLabel lblPlayer;
-	private JLabel lblPlayer_1;
 	private JLabel lblRisultati;
-	private JLabel lblRisultati_1;
 	private JLabel lblPerdente;
 	private JButton btnRigioca;
 	private JButton btnEsci;
@@ -36,29 +36,21 @@ public class FinestraRisultatiClient extends JFrame {
 		lblVincente = new JLabel("Vincente");
 		lblVincente.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblVincente.setHorizontalAlignment(SwingConstants.CENTER);
-		lblVincente.setBounds(133, 11, 173, 54);
+		lblVincente.setBounds(167, 37, 102, 33);
 		contentPane.add(lblVincente);
 		
 		lblPlayer = new JLabel("Player1");
-		lblPlayer.setBounds(115, 76, 46, 14);
+		lblPlayer.setBounds(145, 89, 74, 14);
 		contentPane.add(lblPlayer);
 		
-		lblPlayer_1 = new JLabel("Player2");
-		lblPlayer_1.setBounds(284, 76, 46, 14);
-		contentPane.add(lblPlayer_1);
-		
 		lblRisultati = new JLabel("risultati");
-		lblRisultati.setBounds(115, 101, 46, 14);
+		lblRisultati.setBounds(266, 89, 46, 14);
 		contentPane.add(lblRisultati);
-		
-		lblRisultati_1 = new JLabel("risultati");
-		lblRisultati_1.setBounds(284, 101, 46, 14);
-		contentPane.add(lblRisultati_1);
 		
 		lblPerdente = new JLabel("Perdente");
 		lblPerdente.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblPerdente.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPerdente.setBounds(134, 139, 173, 54);
+		lblPerdente.setBounds(115, 114, 215, 48);
 		contentPane.add(lblPerdente);
 		
 		btnRigioca = new JButton("Rigioca");
@@ -67,7 +59,10 @@ public class FinestraRisultatiClient extends JFrame {
 		contentPane.add(btnRigioca);
 		
 		btnEsci = new JButton("Esci");
-		btnEsci.setEnabled(false);
+		btnEsci.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnEsci.setBounds(115, 204, 89, 23);
 		contentPane.add(btnEsci);
 	}
@@ -88,28 +83,12 @@ public class FinestraRisultatiClient extends JFrame {
 		this.lblPlayer = lblPlayer;
 	}
 
-	public JLabel getLblPlayer_1() {
-		return lblPlayer_1;
-	}
-
-	public void setLblPlayer_1(JLabel lblPlayer_1) {
-		this.lblPlayer_1 = lblPlayer_1;
-	}
-
 	public JLabel getLblRisultati() {
 		return lblRisultati;
 	}
 
 	public void setLblRisultati(JLabel lblRisultati) {
 		this.lblRisultati = lblRisultati;
-	}
-
-	public JLabel getLblRisultati_1() {
-		return lblRisultati_1;
-	}
-
-	public void setLblRisultati_1(JLabel lblRisultati_1) {
-		this.lblRisultati_1 = lblRisultati_1;
 	}
 
 	public JLabel getLblPerdente() {

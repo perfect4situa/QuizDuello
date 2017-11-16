@@ -60,6 +60,14 @@ public class Client {
 		this.out = out;
 	}
 
+	public ReciverClient getListener() {
+		return listener;
+	}
+
+	public void setListener(ReciverClient listener) {
+		this.listener = listener;
+	}
+
 	public String getNickname() {
 		return nickname;
 	}
@@ -93,7 +101,7 @@ public class Client {
 			socket = new Socket(ip, port);
 			in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			out = new PrintWriter(socket.getOutputStream(), true);
-			listener = new ReciverClient(in, this);
+			setListener(new ReciverClient(in, this));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -111,7 +119,7 @@ public class Client {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		listener = null;
+		setListener(null);
 		in = null;
 		out = null;
 		socket = null;

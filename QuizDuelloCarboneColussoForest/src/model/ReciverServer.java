@@ -39,7 +39,7 @@ public class ReciverServer implements Runnable {
 				case "answer":
 					if(vet[1].equals(utente.getQuiz().getQuestion()) && vet[2].equals(utente.getQuiz().getTrue1()))	{
 						utente.sendMsg("result;true;" + utente.getQuiz().toString());
-						utente.setPunteggio(utente.getPunteggio()+1);
+						utente.setPunteggio(utente.getPunteggio() + 1);
 					}
 					else {
 						utente.sendMsg("result;false;" + utente.getQuiz().toString());

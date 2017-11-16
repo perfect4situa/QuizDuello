@@ -25,6 +25,8 @@ public class ControllerClient implements ActionListener {
 		viewConnect.getBtnConnetti().addActionListener(this);
 		viewConnect.setVisible(true);
 		this.viewConnect = viewConnect;
+		viewGame.getProgressBar().setMinimum(0);
+		viewGame.getProgressBar().setMaximum(100);
 		viewGame.getBtnRisposta().addActionListener(this);
 		viewGame.getBtnRisposta_1().addActionListener(this);
 		viewGame.getBtnRisposta_2().addActionListener(this);
