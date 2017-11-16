@@ -49,7 +49,7 @@ public class ReciverClient implements Runnable {
 				
 				case "question":
 					client.getViewGame().clearColors();
-					client.getViewGame().getLblDomanda().setText(vet[1]);
+					client.getViewGame().getLblDomanda().setText("<html>" + vet[1] + "</html>");
 					client.getViewGame().getBtnRisposta().setText(vet[2]);
 					client.getViewGame().getBtnRisposta_1().setText(vet[3]);
 					client.getViewGame().getBtnRisposta_2().setText(vet[4]);
