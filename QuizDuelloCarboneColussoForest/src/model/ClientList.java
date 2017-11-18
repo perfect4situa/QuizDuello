@@ -42,9 +42,15 @@ public class ClientList {
 	
 	public void winner() {
 		Utente x = list.get(0);
+		System.out.println(x.getPunteggio());
+		
 		for(int i = 1; i < list.size(); i++) {
+			
+			System.out.println(list.get(i).getPunteggio());
+			
 			if(x.getPunteggio() < list.get(i).getPunteggio())	{
 				x = list.get(i);
+				
 			}
 		}
 		this.sendAll("endGame;" + x.getNickname());
