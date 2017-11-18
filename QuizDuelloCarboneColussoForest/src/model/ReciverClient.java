@@ -69,23 +69,17 @@ public class ReciverClient implements Runnable {
 				break;
 				
 				case "result":
-					if(vet[2].equals(client.getViewGame().getLblDomanda().getText())) {
-						
-						if(client.getViewGame().getBtnRisposta().getText().equals(vet[3])) {
-							client.getViewGame().getBtnRisposta().setBackground(Color.green);
-						}
-						else if(client.getViewGame().getBtnRisposta_1().getText().equals(vet[3]))
-						{
-							client.getViewGame().getBtnRisposta_1().setBackground(Color.green);
-						}
-						else if(client.getViewGame().getBtnRisposta_2().getText().equals(vet[3]))
-						{
-							client.getViewGame().getBtnRisposta_2().setBackground(Color.green);
-						}
-						else if(client.getViewGame().getBtnRisposta_3().getText().equals(vet[3]))
-						{
-							client.getViewGame().getBtnRisposta_3().setBackground(Color.green);
-						}
+					if(client.getViewGame().getBtnRisposta().getText().equals(vet[3])) {
+						client.getViewGame().getBtnRisposta().setBackground(Color.green);
+					}
+					if(client.getViewGame().getBtnRisposta_1().getText().equals(vet[3])) {
+						client.getViewGame().getBtnRisposta_1().setBackground(Color.green);
+					}
+					if(client.getViewGame().getBtnRisposta_2().getText().equals(vet[3])) {
+						client.getViewGame().getBtnRisposta_2().setBackground(Color.green);
+					}
+					if(client.getViewGame().getBtnRisposta_3().getText().equals(vet[3])) {
+						client.getViewGame().getBtnRisposta_3().setBackground(Color.green);
 					}
 					client.setSemaforo(false);
 				break;
