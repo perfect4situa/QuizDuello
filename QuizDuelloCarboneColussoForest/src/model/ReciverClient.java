@@ -70,14 +70,6 @@ public class ReciverClient implements Runnable {
 				
 				case "result":
 					if(vet[2].equals(client.getViewGame().getLblDomanda().getText())) {
-						if(vet[1].equals("true")) {
-							client.getViewGame().getLblInfo().setText("RISPOSTA ESATTA!!");
-							client.getViewGame().getLblInfo().setBackground(Color.green);
-						}
-						else {
-							client.getViewGame().getLblInfo().setText("RISPOSTA Errata!!");
-							client.getViewGame().getLblInfo().setBackground(Color.red);
-						}
 						
 						if(client.getViewGame().getBtnRisposta().getText().equals(vet[3])) {
 							client.getViewGame().getBtnRisposta().setBackground(Color.green);

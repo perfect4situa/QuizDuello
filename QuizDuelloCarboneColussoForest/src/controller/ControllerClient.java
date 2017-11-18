@@ -53,7 +53,6 @@ public class ControllerClient implements ActionListener {
 						client.connect(ip, port);
 						client.setNickname(viewConnect.getNickname().getText());
 						client.send("newGame;" + client.getNickname());
-						client.setSemaforo(false);
 					}
 				} catch (UnknownHostException e) {
 					JOptionPane.showMessageDialog(viewConnect, "L'indirizzo ip o la porta a cui ci si sta tentando di connettere non risponde", "Errore di connessione", JOptionPane.ERROR_MESSAGE);
@@ -69,6 +68,8 @@ public class ControllerClient implements ActionListener {
 			if(evt.getSource() == viewGame.getBtnRisposta()) {
 				Quiz risp = new Quiz(viewGame.getLblDomanda().getText(), viewGame.getBtnRisposta().getText(), viewGame.getBtnRisposta_1().getText(), viewGame.getBtnRisposta_2().getText(), viewGame.getBtnRisposta_3().getText());
 				client.send("answer;" + risp.toString());
+				
+				
 			}
 			
 			if(evt.getSource() == viewGame.getBtnRisposta_1()) {

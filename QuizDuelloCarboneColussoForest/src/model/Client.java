@@ -109,6 +109,7 @@ public class Client {
 	
 	public void send(String msg) {
 		new Sender(msg, out);
+		semaforo=false;
 	}
 
 	public void disconnect() {
