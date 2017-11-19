@@ -25,10 +25,6 @@ public class QuizList {
 		return index;
 	}
 
-	public void setIndex(int index) {
-		this.index = index;
-	}
-
 	public Quiz take() {
 		int x = -1;
 		boolean flag;
@@ -48,7 +44,7 @@ public class QuizList {
 	}
 	
 	public void caricaQuiz() throws IOException {
-		BufferedReader fBuf = new BufferedReader(new FileReader("..\\QuizDuelloCarboneColussoForest\\resources\\quizData.txt"));
+		BufferedReader fBuf = new BufferedReader(new FileReader("..\\QuizZello\\resources\\quizData.txt"));
 		String[] vet;
 		String nextStr = fBuf.readLine();
 	    while(nextStr != null) {

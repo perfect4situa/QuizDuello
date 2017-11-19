@@ -21,11 +21,10 @@ public class FinestraConnessioneClient extends JFrame {
 	private JButton btnConnetti;
 
 	public FinestraConnessioneClient() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizDuello\\resources\\icon.png"));
-		setTitle("QuizDuello (Connessione)");
+		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizZello\\resources\\icon.png"));
+		setTitle("QuizZello (Connessione)");
 		setResizable(false);
 		setAlwaysOnTop(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		setContentPane(contentPane);
@@ -79,32 +78,16 @@ public class FinestraConnessioneClient extends JFrame {
 		return ip;
 	}
 
-	public void setIp(JTextField ip) {
-		this.ip = ip;
-	}
-
 	public JTextField getPorta() {
 		return porta;
-	}
-
-	public void setPorta(JTextField porta) {
-		this.porta = porta;
 	}
 
 	public JTextField getNickname() {
 		return nickname;
 	}
 
-	public void setNickname(JTextField nickname) {
-		this.nickname = nickname;
-	}
-
 	public JButton getBtnConnetti() {
 		return btnConnetti;
-	}
-
-	public void setBtnConnetti(JButton btnConnetti) {
-		this.btnConnetti = btnConnetti;
 	}
 	
 }

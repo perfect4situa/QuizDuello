@@ -10,22 +10,18 @@ public class Server implements Runnable {
 	private ServerSocket server;
 	private QuizList quizList;
 	private ClientList clientList;
+	private FinestraServer view;
 	private int nQuiz;
 	private int nClient;
-	private FinestraServer view;
 	Thread t;
 	
 	public Server(FinestraServer view) {
-		server=null;
-		quizList=null;
-		clientList=null;
-		nQuiz=1;
-		nClient=2;
-		this.view=view;
-	}
-	
-	public int getnQuiz() {
-		return nQuiz;
+		server = null;
+		quizList = null;
+		clientList = null;
+		nQuiz = 1;
+		nClient = 2;
+		this.view = view;
 	}
 
 	public void setnQuiz(int nQuiz) {
@@ -41,42 +37,41 @@ public class Server implements Runnable {
 	}
 
 	public void run() {
-		quizList=new QuizList(nQuiz);
+		quizList = new QuizList(nQuiz);
 		try {
 			quizList.caricaQuiz();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-			while(clientList.getList().size() < nClient) {
-				Utente newFace=null;
-				try {
-					newFace = new Utente(server.accept());
-					clientList.add(newFace);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				
-				view.getModello().addRow(new String[]{newFace.getSocket().getLocalAddress().toString(), ""+newFace.getSocket().getPort()});
+		while(clientList.getList().size() < nClient) {
+			Utente newFace=null;
+			try {
+				newFace = new Utente(server.accept());
+				clientList.add(newFace);
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 			
+			view.getModello().addRow(new String[] { newFace.getSocket().getLocalAddress().toString(), "" + newFace.getSocket().getPort()});
+		}
+		
+		while(!clientList.allReady());
+		
+		String msg = "startGame";
+		for(int i = 0; i < clientList.getList().size(); i++) {
+			msg += ";" + clientList.getList().get(i).getNickname();
+		}
+		clientList.sendAll(msg);
+		
+		while(quizList.getIndex() < nQuiz) {
 			while(!clientList.allReady());
-			
-			String msg = "startGame";
-			for(int i = 0; i < clientList.getList().size(); i++) {
-				msg += ";" + clientList.getList().get(i).getNickname();
-				
-			}
-			clientList.sendAll(msg);
-			
-			while(quizList.getIndex() < nQuiz) {
-				while(!clientList.allReady());
-				clientList.sendQuiz(quizList.take());
-			}
-			
-			while(!clientList.allReady());
-			
-			clientList.winner();
+			clientList.sendQuiz(quizList.take());
+		}
+		
+		while(!clientList.allReady());
+		
+		clientList.winner();
 	}
 	
 	public void start(int port) {
@@ -91,7 +86,6 @@ public class Server implements Runnable {
 	}
 	
 	public void close()	{
-		
 		if(server!=null)
 		{
 			clientList.closeConnections();

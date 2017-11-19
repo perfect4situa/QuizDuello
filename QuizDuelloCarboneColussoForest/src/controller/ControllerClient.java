@@ -13,7 +13,6 @@ import java.net.UnknownHostException;
 import javax.swing.JOptionPane;
 
 import model.Client;
-import model.Quiz;
 import view.FinestraConnessioneClient;
 import view.FinestraGiocoClient;
 import view.FinestraRisultatiClient;
@@ -50,12 +49,14 @@ public class ControllerClient implements ActionListener, WindowListener {
 		
 		if(client.isSemaforo())	{
 			if(evt.getSource() == viewConnect.getBtnConnetti()) {
+				viewConnect.getBtnConnetti().setBackground(null);
 				try {
 					InetAddress ip = InetAddress.getByName(viewConnect.getIp().getText());
 					int port = Integer.parseInt(viewConnect.getPorta().getText());
 					if(viewConnect.getNickname().getText().equals("")) {
 						JOptionPane.showMessageDialog(viewConnect, "Inserisci un nickname", "Errore", JOptionPane.ERROR_MESSAGE);
-					} else {
+					}
+					else {
 						client.connect(ip, port);
 						client.setNickname(viewConnect.getNickname().getText());
 						client.send("newGame;" + client.getNickname());
@@ -103,32 +104,22 @@ public class ControllerClient implements ActionListener, WindowListener {
 		
 	}
 
-	@Override
-	public void windowActivated(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void windowActivated(WindowEvent arg0) {}
 
-	@Override
-	public void windowClosed(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void windowClosed(WindowEvent arg0) {}
 
-	@Override
 	public void windowClosing(WindowEvent arg0) {
 		
-		if(this.viewGame.isVisible())
-		{
-			if(JOptionPane.showConfirmDialog(this.viewGame, "Sicuro di voler Uscire?", "Avviso",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION){
+		if(viewGame.isVisible()) {
+			if(JOptionPane.showConfirmDialog(viewGame, "Sicuro di voler Uscire?", "Avviso", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 				client.send("Terminate"); 
 				client.disconnect();
 		        exit(0);
 		    }
 		}
-		else if(this.viewEnd.isVisible())
+		else if(viewEnd.isVisible())
 		{
-			if(JOptionPane.showConfirmDialog(this.viewEnd, "Sicuro di voler Uscire?", "Avviso",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION){
+			if(JOptionPane.showConfirmDialog(viewEnd, "Sicuro di voler Uscire?", "Avviso", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
 				client.send("Terminate");
 				client.disconnect();
 		        exit(0);
@@ -137,28 +128,12 @@ public class ControllerClient implements ActionListener, WindowListener {
 		
 	}
 
-	@Override
-	public void windowDeactivated(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void windowDeactivated(WindowEvent arg0) {}
 
-	@Override
-	public void windowDeiconified(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void windowDeiconified(WindowEvent arg0) {}
 
-	@Override
-	public void windowIconified(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void windowIconified(WindowEvent arg0) {}
 
-	@Override
-	public void windowOpened(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void windowOpened(WindowEvent arg0) {}
 
 }

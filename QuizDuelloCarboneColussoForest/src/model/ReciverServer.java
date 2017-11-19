@@ -13,7 +13,7 @@ public class ReciverServer implements Runnable {
 	private boolean on;
 	
 	public ReciverServer(BufferedReader in, Utente utente) {
-		on=true;
+		on = true;
 		message = null;
 		this.in = in;
 		this.utente = utente;
@@ -23,7 +23,7 @@ public class ReciverServer implements Runnable {
 	
 	public void run() {
 		String[] vet;
-		while(on)	{
+		while(on) {
 			try {
 				message = in.readLine();
 			} catch (IOException e) {
@@ -31,10 +31,8 @@ public class ReciverServer implements Runnable {
 				break;
 			}
 			
-			
-			if(on)
-			{
-				vet=message.split(";");
+			if(on) {
+				vet = message.split(";");
 				
 				switch(vet[0]) {
 					case "newGame":
@@ -43,7 +41,6 @@ public class ReciverServer implements Runnable {
 					break;
 					
 					case "answer":
-						
 						if(vet[1].equals(utente.getQuiz().getTrue1()))	{
 							utente.sendMsg("result;true;" + utente.getQuiz().getTrue1()+";"+vet[1]);
 							utente.setPunteggio(utente.getPunteggio() + 100 + Integer.parseInt(vet[2]));
@@ -64,14 +61,11 @@ public class ReciverServer implements Runnable {
 								e.printStackTrace();
 							}
 						}
-							
 						utente.setSemaforo(true);
 					break;
 					
 					case "Terminate":
-						
 						utente.endConnection();
-						
 					break;
 				}
 			}
@@ -86,6 +80,4 @@ public class ReciverServer implements Runnable {
 		this.on = on;
 	}
 	
-	
-
 }

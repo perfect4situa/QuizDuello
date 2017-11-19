@@ -17,7 +17,7 @@ public class ReciverClient implements Runnable {
 	
 	public ReciverClient(BufferedReader in, Client client) {
 		message = null;
-		on=true;
+		on = true;
 		this.in = in;
 		this.client = client;
 		t = new Thread(this);
@@ -28,7 +28,6 @@ public class ReciverClient implements Runnable {
 		return message;
 	}
 	
-	
 	public int getCount() {
 		return count;
 	}
@@ -37,19 +36,14 @@ public class ReciverClient implements Runnable {
 		this.timer = timer;
 	}
 	
-	
-
 	public void setOn(boolean on) {
 		this.on = on;
 	}
 
-	public void run() 
-	{
-		
+	public void run() {
 		String[] vet;
 		
-		while(on)
-		{
+		while(on) {
 			try {
 				message = in.readLine();
 			} catch (IOException e) {
@@ -57,12 +51,10 @@ public class ReciverClient implements Runnable {
 				break;
 			}
 			
-			if(on)
-			{
-				vet=message.split(";");
+			if(on) {
+				vet = message.split(";");
 				
-				switch(vet[0]) 
-				{
+				switch(vet[0]) {
 					case "startGame":
 						client.getViewConnect().setVisible(false);
 						client.getViewGame().setVisible(true);
@@ -84,7 +76,7 @@ public class ReciverClient implements Runnable {
 						client.setSemaforo(true);
 						
 						count = 100;
-						timer=true;
+						timer = true;
 						client.getViewGame().getProgressBar().setValue(100);
 						while(count > 0 && timer) {
 							try {
@@ -96,19 +88,16 @@ public class ReciverClient implements Runnable {
 							}
 						}
 						
-						if(timer)
-						{
+						if(timer) {
 							client.send("answer;*null*");
 						}
-						else
-						{
+						else {
 							client.getViewGame().getProgressBar().setValue(0);
 						}
 						
 					break;
 					
 					case "result":
-						
 						if(!vet[1].equals("slow"))
 						{
 							if(client.getViewGame().getBtnRisposta().getText().equals(vet[2])) {
@@ -140,46 +129,33 @@ public class ReciverClient implements Runnable {
 								}
 							}
 						}
-						
 						client.setSemaforo(false);
 					break;
 					
 					case "endGame":
-						
 						String[] temp;
 						
 						for(String x : vet) {
-							
-							if(!x.equals("endGame"))
-							{
-								temp=x.split(",");
-								
-								if(temp[0].equals(client.getNickname()))
-								{
-									temp[0]="<html><font color=red>"+temp[0]+"</font></html>";
-									temp[1]="<html><font color=red>"+temp[1]+"</font></html>";
+							if(!x.equals("endGame")) {
+								temp = x.split(",");
+								if(temp[0].equals(client.getNickname())) {
+									temp[0] = "<html><font color=red>" + temp[0] + "</font></html>";
+									temp[1] = "<html><font color=red>" + temp[1] + "</font></html>";
 								}
-								
 								client.getViewEnd().getTableModel().addRow(temp);
 							}
-							
 						}
 						
 						client.getViewGame().setVisible(false);
 						client.getViewEnd().setVisible(true);
-						
 					break;
 					
 					case "Terminate":
-						
 						client.disconnect();
-						
 					break;
 				}
-				
-			}		
+			}
 		}
-		
 	}
 	
 }

@@ -1,7 +1,6 @@
 package main;
 
 import controller.ControllerServer;
-import model.Server;
 import view.FinestraServer;
 
 public class MainServer {

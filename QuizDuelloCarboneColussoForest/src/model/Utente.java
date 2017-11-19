@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.concurrent.TimeUnit;
 
 public class Utente implements Comparable<Utente>{
 
@@ -39,7 +38,6 @@ public class Utente implements Comparable<Utente>{
 	}
 	
 	public void endConnection() {
-	
 		recive.setOn(false);
 		
 		try {
@@ -50,11 +48,11 @@ public class Utente implements Comparable<Utente>{
 			e.printStackTrace();
 		}
 		
-		in=null;
-		out=null;
-		socket=null;
-		alive=false;
-		semaforo=true;
+		in = null;
+		out = null;
+		socket = null;
+		alive = false;
+		semaforo = true;
 	}
 	
 	public void sendMsg(String msg)	{
@@ -71,14 +69,6 @@ public class Utente implements Comparable<Utente>{
 
 	public Socket getSocket() {
 		return socket;
-	}
-
-	public BufferedReader getIn() {
-		return in;
-	}
-
-	public PrintWriter getOut() {
-		return out;
 	}
 
 	public int getPunteggio() {
@@ -113,19 +103,13 @@ public class Utente implements Comparable<Utente>{
 		this.alive = alive;
 	}
 
-	@Override
 	public int compareTo(Utente o) {
-		
-		if(this.getPunteggio()>o.getPunteggio())
-		{
+		if(getPunteggio() > o.getPunteggio()) {
 			return -1;
 		}
-		else
-		{
+		else {
 			return 1;
 		}
-		
 	}
-
 	
 }

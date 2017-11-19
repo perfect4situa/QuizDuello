@@ -38,30 +38,6 @@ public class Client {
 		nickname = null;
 		semaforo = true;
 	}
-	
-	public Socket getSocket() {
-		return socket;
-	}
-
-	public void setSocket(Socket socket) {
-		this.socket = socket;
-	}
-
-	public BufferedReader getIn() {
-		return in;
-	}
-
-	public void setIn(BufferedReader in) {
-		this.in = in;
-	}
-
-	public PrintWriter getOut() {
-		return out;
-	}
-
-	public void setOut(PrintWriter out) {
-		this.out = out;
-	}
 
 	public ReciverClient getListener() {
 		return listener;
@@ -112,17 +88,15 @@ public class Client {
 	
 	public void send(String msg) {
 		new Sender(msg, out);
-		semaforo=false;
+		semaforo = false;
 	}
 
 	public void disconnect() {
-		
 		listener.setOn(false);
 		
 		try {
 			TimeUnit.SECONDS.sleep(1);
 		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		

@@ -15,12 +15,7 @@ public class ClientList {
 		return list;
 	}
 	
-	public void setList(ArrayList<Utente> list) {
-		this.list = list;
-	}
-	
-	public void add(Utente x)
-	{
+	public void add(Utente x) {
 		list.add(x);
 	}
 	
@@ -31,18 +26,15 @@ public class ClientList {
 			flag = flag && temp.isSemaforo();
 		}
 		
-		int i=0;
+		int i = 0;
 		
-		while(i<list.size())
-		{
-			if(!list.get(i).isAlive())
-			{
+		while(i < list.size()) {
+			if(!list.get(i).isAlive()) {
 				list.remove(i);
 				i--;
 			}
 			i++;
 		}
-		
 		
 		return flag;
 	}
@@ -61,66 +53,53 @@ public class ClientList {
 		}
 	}
 	
-	private String mixer(Quiz x)
-	{
-		String msg="question;"+x.getQuestion();
+	private String mixer(Quiz x) {
+		String msg = "question;" + x.getQuestion();
 		
-		String[] mixerIn={x.getTrue1(), x.getFalse1(), x.getFalse2(), x.getFalse3()};
+		String[] mixerIn = {x.getTrue1(), x.getFalse1(), x.getFalse2(), x.getFalse3()};
 		int random;
-		int[] array=new int[4];
-		int dim=0;
+		int[] array = new int[4];
+		int dim = 0;
 		boolean go;
 		
-		for(int j=0;j<4;j++)
-		{
-		
-			do
-			{
-				go=true;
+		for(int j = 0; j < 4; j++) {
+			do {
+				go = true;
+				random = (int)(Math.random()*4);
 				
-				random=(int)(Math.random()*4);
-				
-				for(int i=0;i<dim;i++)
-				{
-					if(random==array[i])
-					{
-						go=false;
+				for(int i = 0; i < dim; i++) {
+					if(random == array[i]) {
+						go = false;
 					}
 				}
-				
 			}
 			while(!go);
 			
-			array[dim]=random;
+			array[dim] = random;
 			dim++;
-			
-			msg+=";"+mixerIn[random];
-			
+			msg += ";" + mixerIn[random];
 		}
 		
 		return msg;
 	}
 	
-	private void ordina()
-	{
-		Collections.sort(this.list);
+	private void ordina() {
+		Collections.sort(list);
 	}
 	
 	public void winner() {
-		
 		this.ordina();
 		
-		String msg="endGame";
+		String msg = "endGame";
 		
 		for(int i = 0; i < list.size(); i++) {
-			
-			msg+=";"+list.get(i).getNickname()+","+list.get(i).getPunteggio();
+			msg += ";" + list.get(i).getNickname() + "," + list.get(i).getPunteggio();
 		}
+		
 		this.sendAll(msg);
 	}
 	
 	public void closeConnections() {
-		
 		while(!allReady());
 		
 		for(Utente temp : list) {

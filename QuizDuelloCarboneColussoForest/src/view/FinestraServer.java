@@ -21,22 +21,21 @@ public class FinestraServer extends JFrame {
 	private JPanel panel;
 	private JScrollPane scrollPane;
 	private JTable table;
+	private DefaultTableModel modello;
 	private JLabel lblGiocatoriPerPartita;
 	private JComboBox<String> nGiocatori;
 	private JLabel lblQuizPerPartita;
 	private JComboBox<String> nQuiz;
-	private JButton btnSalva;
+	private JLabel lblOnOff;
 	private JButton btnOn;
 	private JButton btnOff;
-	private JLabel lblOnOff;
-	private DefaultTableModel modello;
+	private JButton btnSalva;
 
 	public FinestraServer() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizDuelloCarboneColussoForest\\resources\\icon.png"));
-		setTitle("QuizDuello (Server)");
+		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizZello\\resources\\icon.png"));
+		setTitle("QuizZello (Server)");
 		setResizable(false);
 		setAlwaysOnTop(true);
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		setContentPane(contentPane);
@@ -53,14 +52,13 @@ public class FinestraServer extends JFrame {
 		panel.add(scrollPane);
 		
 		table = new JTable();
-		modello=new DefaultTableModel(
+		modello = new DefaultTableModel(
 				new Object[][] {
 				},
 				new String[] {
 					"IP", "Porta"
 				}
-			);
-		
+		);
 		table.setModel(modello);
 		table.setToolTipText("Log di connessione");
 		scrollPane.setViewportView(table);
@@ -115,68 +113,32 @@ public class FinestraServer extends JFrame {
 		panel.add(lblOnOff);
 	}
 
-	public JTable getTable() {
-		return table;
-	}
-
-	public void setTable(JTable table) {
-		this.table = table;
-	}
-
 	public JComboBox<String> getnGiocatori() {
 		return nGiocatori;
-	}
-
-	public void setnGiocatori(JComboBox<String> nGiocatori) {
-		this.nGiocatori = nGiocatori;
 	}
 
 	public JComboBox<String> getnQuiz() {
 		return nQuiz;
 	}
-
-	public void setnQuiz(JComboBox<String> nQuiz) {
-		this.nQuiz = nQuiz;
-	}
-
-	public JButton getBtnSalva() {
-		return btnSalva;
-	}
-
-	public void setBtnSalva(JButton btnSalva) {
-		this.btnSalva = btnSalva;
+	
+	public JLabel getLblOnOff() {
+		return lblOnOff;
 	}
 
 	public JButton getBtnOn() {
 		return btnOn;
 	}
 
-	public void setBtnOn(JButton btnOn) {
-		this.btnOn = btnOn;
-	}
-
 	public JButton getBtnOff() {
 		return btnOff;
 	}
-
-	public void setBtnOff(JButton btnOff) {
-		this.btnOff = btnOff;
-	}
-
-	public JLabel getLblOnOff() {
-		return lblOnOff;
-	}
-
-	public void setLblOnOff(JLabel lblOnOff) {
-		this.lblOnOff = lblOnOff;
+	
+	public JButton getBtnSalva() {
+		return btnSalva;
 	}
 
 	public DefaultTableModel getModello() {
 		return modello;
-	}
-
-	public void setModello(DefaultTableModel modello) {
-		this.modello = modello;
 	}
 	
 }

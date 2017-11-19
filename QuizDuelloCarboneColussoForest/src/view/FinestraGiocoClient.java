@@ -16,8 +16,8 @@ public class FinestraGiocoClient extends JFrame {
 
 	private static final long serialVersionUID = -1966956274434527677L;
 	private JPanel contentPane;
-	private JProgressBar progressBar;
 	private JScrollPane scrollPane;
+	private JProgressBar progressBar;
 	private JList<String> list;
 	private DefaultListModel<String> modello;
 	private JLabel lblInfo;
@@ -28,11 +28,10 @@ public class FinestraGiocoClient extends JFrame {
 	private JButton btnRisposta_3;
 
 	public FinestraGiocoClient() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizDuelloCarboneColussoForest\\resources\\icon.png"));
-		setTitle("QuizDuello");
+		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizZello\\resources\\icon.png"));
+		setTitle("QuizZello");
 		setResizable(false);
 		setAlwaysOnTop(true);
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		setContentPane(contentPane);
@@ -88,56 +87,28 @@ public class FinestraGiocoClient extends JFrame {
 		return progressBar;
 	}
 
-	public void setProgressBar(JProgressBar progressBar) {
-		this.progressBar = progressBar;
-	}
-
 	public JList<String> getList() {
 		return list;
-	}
-
-	public void setList(JList<String> list) {
-		this.list = list;
 	}
 
 	public JLabel getLblDomanda() {
 		return lblDomanda;
 	}
 
-	public void setLblDomanda(JLabel lblDomanda) {
-		this.lblDomanda = lblDomanda;
-	}
-
 	public JButton getBtnRisposta() {
 		return btnRisposta;
-	}
-
-	public void setBtnRisposta(JButton btnRisposta) {
-		this.btnRisposta = btnRisposta;
 	}
 
 	public JButton getBtnRisposta_1() {
 		return btnRisposta_1;
 	}
 
-	public void setBtnRisposta_1(JButton btnRisposta_1) {
-		this.btnRisposta_1 = btnRisposta_1;
-	}
-
 	public JButton getBtnRisposta_2() {
 		return btnRisposta_2;
 	}
 
-	public void setBtnRisposta_2(JButton btnRisposta_2) {
-		this.btnRisposta_2 = btnRisposta_2;
-	}
-
 	public JButton getBtnRisposta_3() {
 		return btnRisposta_3;
-	}
-
-	public void setBtnRisposta_3(JButton btnRisposta_3) {
-		this.btnRisposta_3 = btnRisposta_3;
 	}
 
 	public DefaultListModel<String> getModello() {
@@ -146,14 +117,6 @@ public class FinestraGiocoClient extends JFrame {
 
 	public void setModello(DefaultListModel<String> modello) {
 		this.modello = modello;
-	}
-
-	public JLabel getLblInfo() {
-		return lblInfo;
-	}
-
-	public void setLblInfo(JLabel lblInfo) {
-		this.lblInfo = lblInfo;
 	}
 	
 	public void clearColors() {

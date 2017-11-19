@@ -8,8 +8,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -18,19 +16,18 @@ public class FinestraRisultatiClient extends JFrame {
 
 	private static final long serialVersionUID = 7025038189949051806L;
 	private JPanel contentPane;
+	private JScrollPane scrollPane;
 	private JButton btnRigioca;
 	private JButton btnEsci;
-	private JScrollPane scrollPane;
 	private JLabel lblClassifica;
 	private JTable table;
 	private DefaultTableModel tableModel;
 
 	public FinestraRisultatiClient() {
-		setTitle("QuizDuello (Risultati)");
+		setTitle("QuizZello (Risultati)");
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizDuello\\resources\\icon.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizZello\\resources\\icon.png"));
 		setAlwaysOnTop(true);
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		setContentPane(contentPane);
@@ -41,10 +38,6 @@ public class FinestraRisultatiClient extends JFrame {
 		contentPane.add(btnRigioca);
 		
 		btnEsci = new JButton("Esci");
-		btnEsci.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		btnEsci.setBounds(115, 204, 89, 23);
 		contentPane.add(btnEsci);
 		
@@ -72,35 +65,16 @@ public class FinestraRisultatiClient extends JFrame {
 		contentPane.add(lblClassifica);
 	}
 
-	public JTable getTable() {
-		return table;
-	}
-
-	public void setTable(JTable table) {
-		this.table = table;
-	}
-
 	public DefaultTableModel getTableModel() {
 		return tableModel;
-	}
-
-	public void setTableModel(DefaultTableModel tableModel) {
-		this.tableModel = tableModel;
 	}
 
 	public JButton getBtnRigioca() {
 		return btnRigioca;
 	}
 
-	public void setBtnRigioca(JButton btnRigioca) {
-		this.btnRigioca = btnRigioca;
-	}
-
 	public JButton getBtnEsci() {
 		return btnEsci;
 	}
-
-	public void setBtnEsci(JButton btnEsci) {
-		this.btnEsci = btnEsci;
-	}
+	
 }

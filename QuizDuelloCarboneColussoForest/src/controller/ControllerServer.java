@@ -34,7 +34,7 @@ public class ControllerServer implements ActionListener, WindowListener {
 		if(evt.getSource() == view.getBtnSalva()) {
 			server.setnClient(Integer.parseInt((String)view.getnGiocatori().getSelectedItem()));
 			server.setnQuiz(Integer.parseInt((String)view.getnQuiz().getSelectedItem()));
-			JOptionPane.showMessageDialog(null, "Le impostazioni sono state salvate correttamente", "Impostazioni", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(view, "Le impostazioni sono state salvate correttamente", "Impostazioni", JOptionPane.INFORMATION_MESSAGE);
 		}
 		
 		if(evt.getSource() == view.getBtnOn()) {
@@ -55,49 +55,23 @@ public class ControllerServer implements ActionListener, WindowListener {
 		
 	}
 
-	@Override
-	public void windowActivated(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void windowActivated(WindowEvent arg0) {}
 
-	@Override
-	public void windowClosed(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void windowClosed(WindowEvent arg0) {}
 
-	@Override
 	public void windowClosing(WindowEvent arg0) {
-		 if(JOptionPane.showConfirmDialog(this.view, "Sicuro di voler Uscire?", "Avviso",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION){
-			 	server.close();
-	            exit(0);
-	        }  
-		
+		 if(JOptionPane.showConfirmDialog(view, "Sicuro di voler Uscire?", "Avviso", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+			 server.close();
+			 exit(0);
+	     }
 	}
 
-	@Override
-	public void windowDeactivated(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void windowDeactivated(WindowEvent arg0) {}
 
-	@Override
-	public void windowDeiconified(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void windowDeiconified(WindowEvent arg0) {}
 
-	@Override
-	public void windowIconified(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void windowIconified(WindowEvent arg0) {}
 
-	@Override
-	public void windowOpened(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void windowOpened(WindowEvent arg0) {}
 	
 }
