@@ -66,25 +66,23 @@ public class ControllerClient implements ActionListener {
 			}
 			
 			if(evt.getSource() == viewGame.getBtnRisposta()) {
-				Quiz risp = new Quiz(viewGame.getLblDomanda().getText(), viewGame.getBtnRisposta().getText(), viewGame.getBtnRisposta_1().getText(), viewGame.getBtnRisposta_2().getText(), viewGame.getBtnRisposta_3().getText());
-				client.send("answer;" + risp.toString());
-				
-				
+				client.getListener().setTimer(false);
+				client.send("answer;" + viewGame.getBtnRisposta().getText() + ";" + client.getListener().getCount());
 			}
 			
 			if(evt.getSource() == viewGame.getBtnRisposta_1()) {
-				Quiz risp = new Quiz(viewGame.getLblDomanda().getText(), viewGame.getBtnRisposta_1().getText(), viewGame.getBtnRisposta().getText(), viewGame.getBtnRisposta_2().getText(), viewGame.getBtnRisposta_3().getText());
-				client.send("answer;" + risp.toString());
+				client.getListener().setTimer(false);
+				client.send("answer;" + viewGame.getBtnRisposta_1().getText() + ";" + client.getListener().getCount());
 			}
 			
 			if(evt.getSource() == viewGame.getBtnRisposta_2()) {
-				Quiz risp = new Quiz(viewGame.getLblDomanda().getText(), viewGame.getBtnRisposta_2().getText(), viewGame.getBtnRisposta().getText(), viewGame.getBtnRisposta_1().getText(), viewGame.getBtnRisposta_3().getText());
-				client.send("answer;" + risp.toString());
+				client.getListener().setTimer(false);
+				client.send("answer;" + viewGame.getBtnRisposta_2().getText() + ";" + client.getListener().getCount());
 			}
 			
 			if(evt.getSource() == viewGame.getBtnRisposta_3()) {
-				Quiz risp = new Quiz(viewGame.getLblDomanda().getText(), viewGame.getBtnRisposta_3().getText(), viewGame.getBtnRisposta().getText(), viewGame.getBtnRisposta_1().getText(), viewGame.getBtnRisposta_2().getText());
-				client.send("answer;" + risp.toString());
+				client.getListener().setTimer(false);
+				client.send("answer;" + viewGame.getBtnRisposta_3().getText() + ";" + client.getListener().getCount());
 			}
 		}
 		

@@ -54,7 +54,7 @@ public class FinestraRisultatiClient extends JFrame {
 		
 		table = new JTable();
 		tableModel = new DefaultTableModel(
-				new Object[][] {
+				new String[][] {
 				},
 				new String[] {
 					"Nickname", "Punteggio"

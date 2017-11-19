@@ -38,21 +38,27 @@ public class ReciverServer implements Runnable {
 				
 				case "answer":
 					
-					System.out.println(vet[2]);
-					
-					//if(vet[2].equals("<html>" + utente.getQuiz().getTrue1()+"</html>"))	{
-					if(vet[2].equals(utente.getQuiz().getTrue1()))	{
-						utente.sendMsg("result;true;" + utente.getQuiz().toString());
-						utente.setPunteggio(utente.getPunteggio() + 1);
+					if(vet[1].equals(utente.getQuiz().getTrue1()))	{
+						utente.sendMsg("result;true;" + utente.getQuiz().getTrue1()+";"+vet[1]);
+						utente.setPunteggio(utente.getPunteggio() + 100 + Integer.parseInt(vet[2]));
+					}
+					else if(vet[1].equals("*null*"))
+					{
+						utente.sendMsg("result;slow");
 					}
 					else {
-						utente.sendMsg("result;false;" + utente.getQuiz().toString());
+						utente.sendMsg("result;false;" + utente.getQuiz().getTrue1()+";"+vet[1]);
 					}
-					try {
-						TimeUnit.SECONDS.sleep(5);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
+					
+					if(!vet[1].equals("*null*"))
+					{
+						try {
+							TimeUnit.SECONDS.sleep(3);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
 					}
+						
 					utente.setSemaforo(true);
 				break;
 			}

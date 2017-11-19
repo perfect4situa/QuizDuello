@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ClientList {
 	
@@ -40,20 +41,22 @@ public class ClientList {
 		}
 	}
 	
+	private void ordina()
+	{
+		Collections.sort(this.list);
+	}
+	
 	public void winner() {
-		Utente x = list.get(0);
-		System.out.println(x.getPunteggio());
 		
-		for(int i = 1; i < list.size(); i++) {
+		this.ordina();
+		
+		String msg="endGame";
+		
+		for(int i = 0; i < list.size(); i++) {
 			
-			System.out.println(list.get(i).getPunteggio());
-			
-			if(x.getPunteggio() < list.get(i).getPunteggio())	{
-				x = list.get(i);
-				
-			}
+			msg+=";"+list.get(i).getNickname()+","+list.get(i).getPunteggio();
 		}
-		this.sendAll("endGame;" + x.getNickname());
+		this.sendAll(msg);
 	}
 	
 	public void closeConnections() {

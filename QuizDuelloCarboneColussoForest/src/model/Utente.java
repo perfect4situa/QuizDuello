@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class Utente {
+public class Utente implements Comparable<Utente>{
 
 	private String nickname;
 	private int punteggio;
@@ -116,5 +116,20 @@ public class Utente {
 	public void setQuiz(Quiz quiz) {
 		this.quiz = quiz;
 	}
+
+	@Override
+	public int compareTo(Utente o) {
+		
+		if(this.getPunteggio()>o.getPunteggio())
+		{
+			return 0;
+		}
+		else
+		{
+			return 1;
+		}
+		
+	}
+
 	
 }

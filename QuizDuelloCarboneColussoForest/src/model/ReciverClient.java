@@ -11,6 +11,8 @@ public class ReciverClient implements Runnable {
 	private BufferedReader in;
 	private Client client;
 	private Thread t;
+	private int count;
+	private boolean timer;
 	
 	public ReciverClient(BufferedReader in, Client client) {
 		message = null;
@@ -24,8 +26,19 @@ public class ReciverClient implements Runnable {
 		return message;
 	}
 	
+	
+	public int getCount() {
+		return count;
+	}
+
+	public void setTimer(boolean timer) {
+		this.timer = timer;
+	}
+
 	public void run() {
+		
 		String[] vet;
+		
 		while(true)	{
 			try {
 				message = in.readLine();
@@ -55,47 +68,92 @@ public class ReciverClient implements Runnable {
 					client.getViewGame().getBtnRisposta_2().setText(vet[4]);
 					client.getViewGame().getBtnRisposta_3().setText(vet[5]);
 					client.setSemaforo(true);
-					/*int count = 0;
-					while(count < 5) {
+					
+					count = 100;
+					timer=true;
+					client.getViewGame().getProgressBar().setValue(100);
+					while(count > 0 && timer) {
 						try {
-							TimeUnit.SECONDS.sleep(1);
-							client.getViewGame().getProgressBar().setValue(client.getViewGame().getProgressBar().getValue() + 20);
-							count++;
+							TimeUnit.MILLISECONDS.sleep(100);
+							client.getViewGame().getProgressBar().setValue(client.getViewGame().getProgressBar().getValue() - 1);
+							count--;
 						} catch (InterruptedException e) {
 							e.printStackTrace();
 						}
 					}
-					client.getViewGame().getProgressBar().setValue(0);*/
+					
+					if(timer)
+					{
+						client.send("answer;*null*");
+					}
+					else
+					{
+						client.getViewGame().getProgressBar().setValue(0);
+					}
+					
 				break;
 				
 				case "result":
-					if(client.getViewGame().getBtnRisposta().getText().equals(vet[3])) {
-						client.getViewGame().getBtnRisposta().setBackground(Color.green);
+					
+					if(!vet[1].equals("slow"))
+					{
+						if(client.getViewGame().getBtnRisposta().getText().equals(vet[2])) {
+							client.getViewGame().getBtnRisposta().setBackground(Color.green);
+						}
+						else if(client.getViewGame().getBtnRisposta_1().getText().equals(vet[2])) {
+							client.getViewGame().getBtnRisposta_1().setBackground(Color.green);
+						}
+						else if(client.getViewGame().getBtnRisposta_2().getText().equals(vet[2])) {
+							client.getViewGame().getBtnRisposta_2().setBackground(Color.green);
+						}
+						else if(client.getViewGame().getBtnRisposta_3().getText().equals(vet[2])) {
+							client.getViewGame().getBtnRisposta_3().setBackground(Color.green);
+						}
+						
+						if(vet[1].equals("false"))
+						{
+							if(client.getViewGame().getBtnRisposta().getText().equals(vet[3])) {
+								client.getViewGame().getBtnRisposta().setBackground(Color.red);
+							}
+							else if(client.getViewGame().getBtnRisposta_1().getText().equals(vet[3])) {
+								client.getViewGame().getBtnRisposta_1().setBackground(Color.red);
+							}
+							else if(client.getViewGame().getBtnRisposta_2().getText().equals(vet[3])) {
+								client.getViewGame().getBtnRisposta_2().setBackground(Color.red);
+							}
+							else if(client.getViewGame().getBtnRisposta_3().getText().equals(vet[3])) {
+								client.getViewGame().getBtnRisposta_3().setBackground(Color.red);
+							}
+						}
 					}
-					if(client.getViewGame().getBtnRisposta_1().getText().equals(vet[3])) {
-						client.getViewGame().getBtnRisposta_1().setBackground(Color.green);
-					}
-					if(client.getViewGame().getBtnRisposta_2().getText().equals(vet[3])) {
-						client.getViewGame().getBtnRisposta_2().setBackground(Color.green);
-					}
-					if(client.getViewGame().getBtnRisposta_3().getText().equals(vet[3])) {
-						client.getViewGame().getBtnRisposta_3().setBackground(Color.green);
-					}
+					
 					client.setSemaforo(false);
 				break;
 				
 				case "endGame":
-					client.getViewEnd().getLblPlayer().setText(vet[1]);
-					if(vet[1].equals(client.getNickname())) {
-						client.getViewEnd().getLblPerdente().setText("!!Hai VINTO!!");
-						client.getViewEnd().getLblPerdente().setBackground(Color.GREEN);
+					
+					String[] temp;
+					
+					for(String x : vet) {
+						
+						if(!x.equals("endGame"))
+						{
+							temp=x.split(",");
+							
+							if(temp[0].equals(client.getNickname()))
+							{
+								temp[0]="<html><font color=red>"+temp[0]+"</font></html>";
+								temp[1]="<html><font color=red>"+temp[1]+"</font></html>";
+							}
+							
+							client.getViewEnd().getTableModel().addRow(temp);
+						}
+						
 					}
-					else {
-						client.getViewEnd().getLblPerdente().setText("Hai perso :(");
-						client.getViewEnd().getLblPerdente().setBackground(Color.RED);
-					}
+					
 					client.getViewGame().setVisible(false);
 					client.getViewEnd().setVisible(true);
+					
 				break;
 			}
 		}
