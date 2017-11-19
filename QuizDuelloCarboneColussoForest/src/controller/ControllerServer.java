@@ -26,7 +26,7 @@ public class ControllerServer implements ActionListener, WindowListener {
 		view.setVisible(true);
 		this.view = view;
 		
-		this.server = new Server();
+		this.server = new Server(view);
 	}
 
 	public void actionPerformed(ActionEvent evt) {

@@ -57,8 +57,48 @@ public class ClientList {
 		for(Utente temp : list) {
 			temp.setQuiz(x);
 			temp.setSemaforo(false);
-			temp.sendMsg("question;" + x.toString());
+			temp.sendMsg(mixer(x));
 		}
+	}
+	
+	private String mixer(Quiz x)
+	{
+		String msg="question;"+x.getQuestion();
+		
+		String[] mixerIn={x.getTrue1(), x.getFalse1(), x.getFalse2(), x.getFalse3()};
+		int random;
+		int[] array=new int[4];
+		int dim=0;
+		boolean go;
+		
+		for(int j=0;j<4;j++)
+		{
+		
+			do
+			{
+				go=true;
+				
+				random=(int)(Math.random()*4);
+				
+				for(int i=0;i<dim;i++)
+				{
+					if(random==array[i])
+					{
+						go=false;
+					}
+				}
+				
+			}
+			while(!go);
+			
+			array[dim]=random;
+			dim++;
+			
+			msg+=";"+mixerIn[random];
+			
+		}
+		
+		return msg;
 	}
 	
 	private void ordina()

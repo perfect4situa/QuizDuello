@@ -29,6 +29,7 @@ public class FinestraServer extends JFrame {
 	private JButton btnOn;
 	private JButton btnOff;
 	private JLabel lblOnOff;
+	private DefaultTableModel modello;
 
 	public FinestraServer() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizDuelloCarboneColussoForest\\resources\\icon.png"));
@@ -52,13 +53,15 @@ public class FinestraServer extends JFrame {
 		panel.add(scrollPane);
 		
 		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Data e ora", "IP", "Porta"
-			}
-		));
+		modello=new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+					"IP", "Porta"
+				}
+			);
+		
+		table.setModel(modello);
 		table.setToolTipText("Log di connessione");
 		scrollPane.setViewportView(table);
 		
@@ -166,6 +169,14 @@ public class FinestraServer extends JFrame {
 
 	public void setLblOnOff(JLabel lblOnOff) {
 		this.lblOnOff = lblOnOff;
+	}
+
+	public DefaultTableModel getModello() {
+		return modello;
+	}
+
+	public void setModello(DefaultTableModel modello) {
+		this.modello = modello;
 	}
 	
 }

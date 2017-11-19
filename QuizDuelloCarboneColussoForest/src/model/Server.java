@@ -3,6 +3,8 @@ package model;
 import java.io.IOException;
 import java.net.ServerSocket;
 
+import view.FinestraServer;
+
 public class Server implements Runnable {
 
 	private ServerSocket server;
@@ -10,14 +12,16 @@ public class Server implements Runnable {
 	private ClientList clientList;
 	private int nQuiz;
 	private int nClient;
+	private FinestraServer view;
 	Thread t;
 	
-	public Server() {
+	public Server(FinestraServer view) {
 		server=null;
 		quizList=null;
 		clientList=null;
 		nQuiz=1;
 		nClient=2;
+		this.view=view;
 	}
 	
 	public int getnQuiz() {
@@ -45,13 +49,15 @@ public class Server implements Runnable {
 		}
 		
 			while(clientList.getList().size() < nClient) {
-				Utente newFace;
+				Utente newFace=null;
 				try {
 					newFace = new Utente(server.accept());
 					clientList.add(newFace);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+				
+				view.getModello().addRow(new String[]{newFace.getSocket().getLocalAddress().toString(), ""+newFace.getSocket().getPort()});
 			}
 			
 			while(!clientList.allReady());
