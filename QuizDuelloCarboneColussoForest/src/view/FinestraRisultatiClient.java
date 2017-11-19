@@ -10,17 +10,20 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class FinestraRisultatiClient extends JFrame {
 
 	private static final long serialVersionUID = 7025038189949051806L;
 	private JPanel contentPane;
-	private JLabel lblVincente;
-	private JLabel lblPlayer;
-	private JLabel lblRisultati;
-	private JLabel lblPerdente;
 	private JButton btnRigioca;
 	private JButton btnEsci;
+	private JScrollPane scrollPane;
+	private JLabel lblClassifica;
+	private JTable table;
+	private DefaultTableModel tableModel;
 
 	public FinestraRisultatiClient() {
 		setTitle("QuizDuello (Risultati)");
@@ -33,28 +36,7 @@ public class FinestraRisultatiClient extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		lblVincente = new JLabel("Vincente");
-		lblVincente.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblVincente.setHorizontalAlignment(SwingConstants.CENTER);
-		lblVincente.setBounds(167, 37, 102, 33);
-		contentPane.add(lblVincente);
-		
-		lblPlayer = new JLabel("Player1");
-		lblPlayer.setBounds(145, 89, 74, 14);
-		contentPane.add(lblPlayer);
-		
-		lblRisultati = new JLabel("risultati");
-		lblRisultati.setBounds(266, 89, 46, 14);
-		contentPane.add(lblRisultati);
-		
-		lblPerdente = new JLabel("Perdente");
-		lblPerdente.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblPerdente.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPerdente.setBounds(115, 114, 215, 48);
-		contentPane.add(lblPerdente);
-		
 		btnRigioca = new JButton("Rigioca");
-		btnRigioca.setEnabled(false);
 		btnRigioca.setBounds(241, 204, 89, 23);
 		contentPane.add(btnRigioca);
 		
@@ -65,38 +47,45 @@ public class FinestraRisultatiClient extends JFrame {
 		});
 		btnEsci.setBounds(115, 204, 89, 23);
 		contentPane.add(btnEsci);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(95, 61, 249, 112);
+		contentPane.add(scrollPane);
+		
+		table = new JTable();
+		tableModel = new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+					"Nickname", "Punteggio"
+				}
+		);
+		table.setModel(tableModel);
+		table.setToolTipText("Classifica");
+		table.setFont(new Font("Comic Sans MS", Font.PLAIN, 14));
+		scrollPane.setViewportView(table);
+		
+		lblClassifica = new JLabel("Classifica");
+		lblClassifica.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblClassifica.setHorizontalAlignment(SwingConstants.CENTER);
+		lblClassifica.setBounds(169, 25, 89, 25);
+		contentPane.add(lblClassifica);
 	}
 
-	public JLabel getLblVincente() {
-		return lblVincente;
+	public JTable getTable() {
+		return table;
 	}
 
-	public void setLblVincente(JLabel lblVincente) {
-		this.lblVincente = lblVincente;
+	public void setTable(JTable table) {
+		this.table = table;
 	}
 
-	public JLabel getLblPlayer() {
-		return lblPlayer;
+	public DefaultTableModel getTableModel() {
+		return tableModel;
 	}
 
-	public void setLblPlayer(JLabel lblPlayer) {
-		this.lblPlayer = lblPlayer;
-	}
-
-	public JLabel getLblRisultati() {
-		return lblRisultati;
-	}
-
-	public void setLblRisultati(JLabel lblRisultati) {
-		this.lblRisultati = lblRisultati;
-	}
-
-	public JLabel getLblPerdente() {
-		return lblPerdente;
-	}
-
-	public void setLblPerdente(JLabel lblPerdente) {
-		this.lblPerdente = lblPerdente;
+	public void setTableModel(DefaultTableModel tableModel) {
+		this.tableModel = tableModel;
 	}
 
 	public JButton getBtnRigioca() {
@@ -114,5 +103,4 @@ public class FinestraRisultatiClient extends JFrame {
 	public void setBtnEsci(JButton btnEsci) {
 		this.btnEsci = btnEsci;
 	}
-	
 }
