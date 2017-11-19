@@ -28,7 +28,7 @@ public class FinestraGiocoClient extends JFrame {
 	private JButton btnRisposta_3;
 
 	public FinestraGiocoClient() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizZello\\resources\\icon.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizDuelloCarboneColussoForest\\resources\\icon.png"));
 		setTitle("QuizZello");
 		setResizable(false);
 		setAlwaysOnTop(true);

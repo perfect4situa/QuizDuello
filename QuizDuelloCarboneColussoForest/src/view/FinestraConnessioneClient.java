@@ -21,7 +21,7 @@ public class FinestraConnessioneClient extends JFrame {
 	private JButton btnConnetti;
 
 	public FinestraConnessioneClient() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizZello\\resources\\icon.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizDuelloCarboneColussoForest\\resources\\icon.png"));
 		setTitle("QuizZello (Connessione)");
 		setResizable(false);
 		setAlwaysOnTop(true);

@@ -26,7 +26,7 @@ public class FinestraRisultatiClient extends JFrame {
 	public FinestraRisultatiClient() {
 		setTitle("QuizZello (Risultati)");
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizZello\\resources\\icon.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizDuelloCarboneColussoForest\\resources\\icon.png"));
 		setAlwaysOnTop(true);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

@@ -32,7 +32,7 @@ public class FinestraServer extends JFrame {
 	private JButton btnSalva;
 
 	public FinestraServer() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizZello\\resources\\icon.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizDuelloCarboneColussoForest\\resources\\icon.png"));
 		setTitle("QuizZello (Server)");
 		setResizable(false);
 		setAlwaysOnTop(true);
