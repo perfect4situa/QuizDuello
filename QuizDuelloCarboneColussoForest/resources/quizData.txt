@@ -9,3 +9,14 @@ Qual'è la cilindrata delle attuali monoposto di F1?;1600;2000;3000;1800
 In che tracciato si trova la famosa curva "Maggots"?;Silverstone;Austin;Sachsenring;Hungaroring
 Chi è stato il campione del mondo più vecchio della storia della F1?;Fangio;Schumacher;Mansell;Clark
 Chi è il pilota più giovane ad ottenere una prima fila in F1?;Stroll;Verstappen;Hamilton;Vettel
+Come vettel ribattezza la sua red bull rb8?;Abbey;Luscious Liz;kinky Kylie;Stardust
+Quante volte Jean Alesi partì in prima fila nella sua carriera?;10;12;11;13
+Quale fu il Gran Premio extra europeo della F1?;Argentina 1953;Stati Uniti 1952;Giappone 1954;Brasile 1955
+Quale record si stabilì a Valencia nel 2011?;GP con più vetture al traguardo;GP più noioso della storia;GP più brutto della storia;GP con più leader al traguardo
+Come si chiama la curva 15 del Gp di Spa?;Stavelot;Campus;Blanchimont;Bruxelles
+Quanto era lungo inizialmente il circuito di Spa?;14.9 km;7.04 km;16.01 km;8.58 km
+Peso delle attuali gomme posteriori di F1?;11.5;11;8.5;9.6
+Quanti GP ha vinto Irvine in Ferrari?Quattro;Tre;Cinque
+Chi ha suggerito ad Enzo Ferrari di usare il cavallino rampante come logo?;Il Conte Baracca;Luigi Einaudi;Tazio Nuvolari
+Chi dopo Schumacher ha ottenuto più vittorie in Ferrari?;Niki Lauda;Alain Prost;Rubens Barrichello;Sebastian Vettel
+In che anno morì il grande Ayrton Senna?;1994;1997;1996;1993
