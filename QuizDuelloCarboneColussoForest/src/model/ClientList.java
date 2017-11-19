@@ -33,7 +33,7 @@ public class ClientList {
 		
 		int i=0;
 		
-		do
+		while(i<list.size())
 		{
 			if(!list.get(i).isAlive())
 			{
@@ -42,7 +42,7 @@ public class ClientList {
 			}
 			i++;
 		}
-		while(i<list.size());
+		
 		
 		return flag;
 	}
