@@ -16,7 +16,7 @@ Quale record si stabilì a Valencia nel 2011?;GP con più vetture al traguardo;GP 
 Come si chiama la curva 15 del Gp di Spa?;Stavelot;Campus;Blanchimont;Bruxelles
 Quanto era lungo inizialmente il circuito di Spa?;14.9 km;7.04 km;16.01 km;8.58 km
 Peso delle attuali gomme posteriori di F1?;11.5;11;8.5;9.6
-Quanti GP ha vinto Irvine in Ferrari?Quattro;Tre;Cinque
+Quanti GP ha vinto Irvine in Ferrari?Quattro;Tre;Cinque;Zero
 Chi ha suggerito ad Enzo Ferrari di usare il cavallino rampante come logo?;Il Conte Baracca;Luigi Einaudi;Tazio Nuvolari
 Chi dopo Schumacher ha ottenuto più vittorie in Ferrari?;Niki Lauda;Alain Prost;Rubens Barrichello;Sebastian Vettel
 In che anno morì il grande Ayrton Senna?;1994;1997;1996;1993
