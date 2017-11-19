@@ -10,8 +10,10 @@ public class ReciverServer implements Runnable {
 	private BufferedReader in;
 	private Utente utente;
 	private Thread t;
+	private boolean on;
 	
 	public ReciverServer(BufferedReader in, Utente utente) {
+		on=true;
 		message = null;
 		this.in = in;
 		this.utente = utente;
@@ -21,46 +23,57 @@ public class ReciverServer implements Runnable {
 	
 	public void run() {
 		String[] vet;
-		while(true)	{
+		while(on)	{
 			try {
 				message = in.readLine();
 			} catch (IOException e) {
 				e.printStackTrace();
 				break;
 			}
-			vet=message.split(";");
 			
-			switch(vet[0]) {
-				case "newGame":
-					utente.setNickname(vet[1]);
-					utente.setSemaforo(true);
-				break;
+			
+			if(on)
+			{
+				vet=message.split(";");
 				
-				case "answer":
+				switch(vet[0]) {
+					case "newGame":
+						utente.setNickname(vet[1]);
+						utente.setSemaforo(true);
+					break;
 					
-					if(vet[1].equals(utente.getQuiz().getTrue1()))	{
-						utente.sendMsg("result;true;" + utente.getQuiz().getTrue1()+";"+vet[1]);
-						utente.setPunteggio(utente.getPunteggio() + 100 + Integer.parseInt(vet[2]));
-					}
-					else if(vet[1].equals("*null*"))
-					{
-						utente.sendMsg("result;slow");
-					}
-					else {
-						utente.sendMsg("result;false;" + utente.getQuiz().getTrue1()+";"+vet[1]);
-					}
-					
-					if(!vet[1].equals("*null*"))
-					{
-						try {
-							TimeUnit.SECONDS.sleep(3);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
-						}
-					}
+					case "answer":
 						
-					utente.setSemaforo(true);
-				break;
+						if(vet[1].equals(utente.getQuiz().getTrue1()))	{
+							utente.sendMsg("result;true;" + utente.getQuiz().getTrue1()+";"+vet[1]);
+							utente.setPunteggio(utente.getPunteggio() + 100 + Integer.parseInt(vet[2]));
+						}
+						else if(vet[1].equals("*null*"))
+						{
+							utente.sendMsg("result;slow");
+						}
+						else {
+							utente.sendMsg("result;false;" + utente.getQuiz().getTrue1()+";"+vet[1]);
+						}
+						
+						if(!vet[1].equals("*null*"))
+						{
+							try {
+								TimeUnit.SECONDS.sleep(3);
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+						}
+							
+						utente.setSemaforo(true);
+					break;
+					
+					case "Terminate":
+						
+						utente.endConnection();
+						
+					break;
+				}
 			}
 		}
 	}
@@ -68,5 +81,11 @@ public class ReciverServer implements Runnable {
 	public String getMessage() {
 		return message;
 	}
+
+	public void setOn(boolean on) {
+		this.on = on;
+	}
+	
+	
 
 }

@@ -13,9 +13,11 @@ public class ReciverClient implements Runnable {
 	private Thread t;
 	private int count;
 	private boolean timer;
+	private boolean on;
 	
 	public ReciverClient(BufferedReader in, Client client) {
 		message = null;
+		on=true;
 		this.in = in;
 		this.client = client;
 		t = new Thread(this);
@@ -34,129 +36,150 @@ public class ReciverClient implements Runnable {
 	public void setTimer(boolean timer) {
 		this.timer = timer;
 	}
+	
+	
 
-	public void run() {
+	public void setOn(boolean on) {
+		this.on = on;
+	}
+
+	public void run() 
+	{
 		
 		String[] vet;
 		
-		while(true)	{
+		while(on)
+		{
 			try {
 				message = in.readLine();
 			} catch (IOException e) {
 				e.printStackTrace();
 				break;
 			}
-			vet=message.split(";");
 			
-			switch(vet[0]) {
-				case "startGame":
-					client.getViewConnect().setVisible(false);
-					client.getViewGame().setVisible(true);
-					client.getViewGame().getModello().clear();
-					for(String temp : vet) {
-						if(!temp.equals(client.getNickname()) && !temp.equals("startGame"))	{
-							client.getViewGame().getModello().addElement(temp);
-						}
-					}
-				break;
+			if(on)
+			{
+				vet=message.split(";");
 				
-				case "question":
-					client.getViewGame().clearColors();
-					client.getViewGame().getLblDomanda().setText("<html>" + vet[1] + "</html>");
-					client.getViewGame().getBtnRisposta().setText(vet[2]);
-					client.getViewGame().getBtnRisposta_1().setText(vet[3]);
-					client.getViewGame().getBtnRisposta_2().setText(vet[4]);
-					client.getViewGame().getBtnRisposta_3().setText(vet[5]);
-					client.setSemaforo(true);
-					
-					count = 100;
-					timer=true;
-					client.getViewGame().getProgressBar().setValue(100);
-					while(count > 0 && timer) {
-						try {
-							TimeUnit.MILLISECONDS.sleep(100);
-							client.getViewGame().getProgressBar().setValue(client.getViewGame().getProgressBar().getValue() - 1);
-							count--;
-						} catch (InterruptedException e) {
-							e.printStackTrace();
+				switch(vet[0]) 
+				{
+					case "startGame":
+						client.getViewConnect().setVisible(false);
+						client.getViewGame().setVisible(true);
+						client.getViewGame().getModello().clear();
+						for(String temp : vet) {
+							if(!temp.equals(client.getNickname()) && !temp.equals("startGame"))	{
+								client.getViewGame().getModello().addElement(temp);
+							}
 						}
-					}
+					break;
 					
-					if(timer)
-					{
-						client.send("answer;*null*");
-					}
-					else
-					{
-						client.getViewGame().getProgressBar().setValue(0);
-					}
-					
-				break;
-				
-				case "result":
-					
-					if(!vet[1].equals("slow"))
-					{
-						if(client.getViewGame().getBtnRisposta().getText().equals(vet[2])) {
-							client.getViewGame().getBtnRisposta().setBackground(Color.green);
-						}
-						else if(client.getViewGame().getBtnRisposta_1().getText().equals(vet[2])) {
-							client.getViewGame().getBtnRisposta_1().setBackground(Color.green);
-						}
-						else if(client.getViewGame().getBtnRisposta_2().getText().equals(vet[2])) {
-							client.getViewGame().getBtnRisposta_2().setBackground(Color.green);
-						}
-						else if(client.getViewGame().getBtnRisposta_3().getText().equals(vet[2])) {
-							client.getViewGame().getBtnRisposta_3().setBackground(Color.green);
+					case "question":
+						client.getViewGame().clearColors();
+						client.getViewGame().getLblDomanda().setText("<html>" + vet[1] + "</html>");
+						client.getViewGame().getBtnRisposta().setText(vet[2]);
+						client.getViewGame().getBtnRisposta_1().setText(vet[3]);
+						client.getViewGame().getBtnRisposta_2().setText(vet[4]);
+						client.getViewGame().getBtnRisposta_3().setText(vet[5]);
+						client.setSemaforo(true);
+						
+						count = 100;
+						timer=true;
+						client.getViewGame().getProgressBar().setValue(100);
+						while(count > 0 && timer) {
+							try {
+								TimeUnit.MILLISECONDS.sleep(100);
+								client.getViewGame().getProgressBar().setValue(client.getViewGame().getProgressBar().getValue() - 1);
+								count--;
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
 						}
 						
-						if(vet[1].equals("false"))
+						if(timer)
 						{
-							if(client.getViewGame().getBtnRisposta().getText().equals(vet[3])) {
-								client.getViewGame().getBtnRisposta().setBackground(Color.red);
-							}
-							else if(client.getViewGame().getBtnRisposta_1().getText().equals(vet[3])) {
-								client.getViewGame().getBtnRisposta_1().setBackground(Color.red);
-							}
-							else if(client.getViewGame().getBtnRisposta_2().getText().equals(vet[3])) {
-								client.getViewGame().getBtnRisposta_2().setBackground(Color.red);
-							}
-							else if(client.getViewGame().getBtnRisposta_3().getText().equals(vet[3])) {
-								client.getViewGame().getBtnRisposta_3().setBackground(Color.red);
-							}
+							client.send("answer;*null*");
 						}
-					}
-					
-					client.setSemaforo(false);
-				break;
-				
-				case "endGame":
-					
-					String[] temp;
-					
-					for(String x : vet) {
-						
-						if(!x.equals("endGame"))
+						else
 						{
-							temp=x.split(",");
+							client.getViewGame().getProgressBar().setValue(0);
+						}
+						
+					break;
+					
+					case "result":
+						
+						if(!vet[1].equals("slow"))
+						{
+							if(client.getViewGame().getBtnRisposta().getText().equals(vet[2])) {
+								client.getViewGame().getBtnRisposta().setBackground(Color.green);
+							}
+							else if(client.getViewGame().getBtnRisposta_1().getText().equals(vet[2])) {
+								client.getViewGame().getBtnRisposta_1().setBackground(Color.green);
+							}
+							else if(client.getViewGame().getBtnRisposta_2().getText().equals(vet[2])) {
+								client.getViewGame().getBtnRisposta_2().setBackground(Color.green);
+							}
+							else if(client.getViewGame().getBtnRisposta_3().getText().equals(vet[2])) {
+								client.getViewGame().getBtnRisposta_3().setBackground(Color.green);
+							}
 							
-							if(temp[0].equals(client.getNickname()))
+							if(vet[1].equals("false"))
 							{
-								temp[0]="<html><font color=red>"+temp[0]+"</font></html>";
-								temp[1]="<html><font color=red>"+temp[1]+"</font></html>";
+								if(client.getViewGame().getBtnRisposta().getText().equals(vet[3])) {
+									client.getViewGame().getBtnRisposta().setBackground(Color.red);
+								}
+								else if(client.getViewGame().getBtnRisposta_1().getText().equals(vet[3])) {
+									client.getViewGame().getBtnRisposta_1().setBackground(Color.red);
+								}
+								else if(client.getViewGame().getBtnRisposta_2().getText().equals(vet[3])) {
+									client.getViewGame().getBtnRisposta_2().setBackground(Color.red);
+								}
+								else if(client.getViewGame().getBtnRisposta_3().getText().equals(vet[3])) {
+									client.getViewGame().getBtnRisposta_3().setBackground(Color.red);
+								}
 							}
-							
-							client.getViewEnd().getTableModel().addRow(temp);
 						}
 						
-					}
+						client.setSemaforo(false);
+					break;
 					
-					client.getViewGame().setVisible(false);
-					client.getViewEnd().setVisible(true);
+					case "endGame":
+						
+						String[] temp;
+						
+						for(String x : vet) {
+							
+							if(!x.equals("endGame"))
+							{
+								temp=x.split(",");
+								
+								if(temp[0].equals(client.getNickname()))
+								{
+									temp[0]="<html><font color=red>"+temp[0]+"</font></html>";
+									temp[1]="<html><font color=red>"+temp[1]+"</font></html>";
+								}
+								
+								client.getViewEnd().getTableModel().addRow(temp);
+							}
+							
+						}
+						
+						client.getViewGame().setVisible(false);
+						client.getViewEnd().setVisible(true);
+						
+					break;
 					
-				break;
-			}
+					case "Terminate":
+						
+						client.disconnect();
+						
+					break;
+				}
+				
+			}		
 		}
+		
 	}
 	
 }

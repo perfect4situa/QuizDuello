@@ -19,11 +19,31 @@ public class ClientList {
 		this.list = list;
 	}
 	
+	public void add(Utente x)
+	{
+		list.add(x);
+	}
+	
 	public boolean allReady() {
 		boolean flag = true;
+		
 		for(Utente temp : list) {
 			flag = flag && temp.isSemaforo();
 		}
+		
+		int i=0;
+		
+		do
+		{
+			if(!list.get(i).isAlive())
+			{
+				list.remove(i);
+				i--;
+			}
+			i++;
+		}
+		while(i<list.size());
+		
 		return flag;
 	}
 	
@@ -60,8 +80,13 @@ public class ClientList {
 	}
 	
 	public void closeConnections() {
+		
+		while(!allReady());
+		
 		for(Utente temp : list) {
+			temp.sendMsg("Terminate");
 			temp.endConnection();
+			
 		}
 	}
 

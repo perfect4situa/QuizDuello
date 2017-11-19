@@ -1,8 +1,12 @@
 package controller;
 
+import static java.lang.System.exit;
+
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -14,7 +18,7 @@ import view.FinestraConnessioneClient;
 import view.FinestraGiocoClient;
 import view.FinestraRisultatiClient;
 
-public class ControllerClient implements ActionListener {
+public class ControllerClient implements ActionListener, WindowListener {
 	
 	private Client client;
 	private FinestraConnessioneClient viewConnect;
@@ -37,6 +41,8 @@ public class ControllerClient implements ActionListener {
 		viewEnd.getBtnEsci().addActionListener(this);
 		viewEnd.setVisible(false);
 		this.viewEnd = viewEnd;
+		viewGame.addWindowListener(this);
+		viewEnd.addWindowListener(this);
 		this.client = new Client(viewConnect, viewGame, viewEnd);
 	}
 
@@ -91,9 +97,67 @@ public class ControllerClient implements ActionListener {
 		}
 		
 		if(evt.getSource() == viewEnd.getBtnEsci()) {
+			client.send("Terminate"); 
 			client.disconnect();
-			System.exit(0);
 		}
+		
+	}
+
+	@Override
+	public void windowActivated(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowClosed(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowClosing(WindowEvent arg0) {
+		
+		if(this.viewGame.isVisible())
+		{
+			if(JOptionPane.showConfirmDialog(this.viewGame, "Sicuro di voler Uscire?", "Avviso",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION){
+				client.send("Terminate"); 
+				client.disconnect();
+		        exit(0);
+		    }
+		}
+		else if(this.viewEnd.isVisible())
+		{
+			if(JOptionPane.showConfirmDialog(this.viewEnd, "Sicuro di voler Uscire?", "Avviso",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)==JOptionPane.YES_OPTION){
+				client.send("Terminate");
+				client.disconnect();
+		        exit(0);
+		    }
+		}
+		
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowIconified(WindowEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowOpened(WindowEvent arg0) {
+		// TODO Auto-generated method stub
 		
 	}
 

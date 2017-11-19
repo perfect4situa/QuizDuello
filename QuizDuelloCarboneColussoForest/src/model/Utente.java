@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.concurrent.TimeUnit;
 
 public class Utente implements Comparable<Utente>{
 
@@ -16,8 +17,10 @@ public class Utente implements Comparable<Utente>{
 	private BufferedReader in;
 	private PrintWriter out;
 	private ReciverServer recive;
+	private boolean alive;
 	
 	public Utente(Socket socket) {
+		alive=true;
 		this.socket = socket;
 		this.openChannels();
 		quiz = null;
@@ -36,6 +39,9 @@ public class Utente implements Comparable<Utente>{
 	}
 	
 	public void endConnection() {
+	
+		recive.setOn(false);
+		
 		try {
 			in.close();
 			out.close();
@@ -47,6 +53,8 @@ public class Utente implements Comparable<Utente>{
 		in=null;
 		out=null;
 		socket=null;
+		alive=false;
+		semaforo=true;
 	}
 	
 	public void sendMsg(String msg)	{
@@ -65,32 +73,12 @@ public class Utente implements Comparable<Utente>{
 		return socket;
 	}
 
-	public void setSocket(Socket socket) {
-		this.socket = socket;
-	}
-
 	public BufferedReader getIn() {
 		return in;
 	}
 
-	public void setIn(BufferedReader in) {
-		this.in = in;
-	}
-
 	public PrintWriter getOut() {
 		return out;
-	}
-
-	public void setOut(PrintWriter out) {
-		this.out = out;
-	}
-
-	public ReciverServer getRecive() {
-		return recive;
-	}
-
-	public void setRecive(ReciverServer recive) {
-		this.recive = recive;
 	}
 
 	public int getPunteggio() {
@@ -117,12 +105,20 @@ public class Utente implements Comparable<Utente>{
 		this.quiz = quiz;
 	}
 
+	public boolean isAlive() {
+		return alive;
+	}
+
+	public void setAlive(boolean alive) {
+		this.alive = alive;
+	}
+
 	@Override
 	public int compareTo(Utente o) {
 		
 		if(this.getPunteggio()>o.getPunteggio())
 		{
-			return 0;
+			return -1;
 		}
 		else
 		{

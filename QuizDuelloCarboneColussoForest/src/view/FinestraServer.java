@@ -35,7 +35,7 @@ public class FinestraServer extends JFrame {
 		setTitle("QuizDuello (Server)");
 		setResizable(false);
 		setAlwaysOnTop(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		setContentPane(contentPane);
