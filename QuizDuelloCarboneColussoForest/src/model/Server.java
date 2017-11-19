@@ -45,7 +45,7 @@ public class Server implements Runnable {
 		}
 		
 		while(clientList.getList().size() < nClient) {
-			Utente newFace=null;
+			Utente newFace = null;
 			try {
 				newFace = new Utente(server.accept());
 				clientList.add(newFace);

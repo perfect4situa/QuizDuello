@@ -57,6 +57,7 @@ public class ControllerClient implements ActionListener, WindowListener {
 						JOptionPane.showMessageDialog(viewConnect, "Inserisci un nickname", "Errore", JOptionPane.ERROR_MESSAGE);
 					}
 					else {
+						viewConnect.getLblConnessione().setText("In connessione...");
 						client.connect(ip, port);
 						client.setNickname(viewConnect.getNickname().getText());
 						client.send("newGame;" + client.getNickname());

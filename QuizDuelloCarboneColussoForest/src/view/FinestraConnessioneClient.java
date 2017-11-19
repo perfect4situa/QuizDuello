@@ -19,6 +19,7 @@ public class FinestraConnessioneClient extends JFrame {
 	private JLabel lblNickname;
 	private JTextField nickname;
 	private JButton btnConnetti;
+	private JLabel lblConnessione;
 
 	public FinestraConnessioneClient() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("..\\QuizDuelloCarboneColussoForest\\resources\\icon.png"));
@@ -72,6 +73,10 @@ public class FinestraConnessioneClient extends JFrame {
 		btnConnetti.setToolTipText("Richiesta connessione al server");
 		btnConnetti.setBounds(166, 175, 115, 23);
 		panel.add(btnConnetti);
+		
+		lblConnessione = new JLabel("");
+		lblConnessione.setBounds(176, 150, 96, 14);
+		panel.add(lblConnessione);
 	}
 
 	public JTextField getIp() {
@@ -85,9 +90,12 @@ public class FinestraConnessioneClient extends JFrame {
 	public JTextField getNickname() {
 		return nickname;
 	}
+	
+	public JLabel getLblConnessione() {
+		return lblConnessione;
+	}
 
 	public JButton getBtnConnetti() {
 		return btnConnetti;
 	}
-	
 }
