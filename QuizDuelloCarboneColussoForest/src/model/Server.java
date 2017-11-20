@@ -2,6 +2,7 @@ package model;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.util.concurrent.TimeUnit;
 
 import view.FinestraServer;
 
@@ -63,6 +64,13 @@ public class Server implements Runnable {
 			msg += ";" + clientList.getList().get(i).getNickname();
 		}
 		clientList.sendAll(msg);
+		
+		try {
+			TimeUnit.MILLISECONDS.sleep(100);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		while(quizList.getIndex() < nQuiz) {
 			while(!clientList.allReady());
