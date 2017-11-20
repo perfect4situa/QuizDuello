@@ -53,7 +53,7 @@ public class ControllerClient implements ActionListener, WindowListener {
 				try {
 					InetAddress ip = InetAddress.getByName(viewConnect.getIp().getText());
 					int port = Integer.parseInt(viewConnect.getPorta().getText());
-					if(viewConnect.getNickname().getText().equals("")) {
+					if(viewConnect.getNickname().getText().equals("") || viewConnect.getNickname().getText().contains(";") || viewConnect.getNickname().getText().contains(",")) {
 						JOptionPane.showMessageDialog(viewConnect, "Inserisci un nickname", "Errore", JOptionPane.ERROR_MESSAGE);
 					}
 					else {
